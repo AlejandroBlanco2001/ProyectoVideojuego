@@ -50,7 +50,7 @@ public class AerialEnemy extends Enemy {
         this.height = 99;
         //Vida y velocidad
         this.setHealth(15);
-        this.speed = 300;
+        this.speed = 250;
         //Hitbox
         bounds.x = 0;
         bounds.y = 0;

@@ -206,8 +206,6 @@ public class MainPlayer extends Character {
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.red);
-        g.fillRect((int) (bounds.x + x), (int) (bounds.y + y), bounds.width, bounds.height);
         g.drawImage(getCurrentAnimationFrame(), (int) x, (int) y, null);
         if (showStamp) {
             g.drawImage(animTimeStamp.getCurrentFrame(), (int) returnPoint.x, (int) returnPoint.y, null);

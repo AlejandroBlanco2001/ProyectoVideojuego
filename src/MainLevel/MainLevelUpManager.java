@@ -49,7 +49,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         musicPlaylist = AudioLoader.musicPlayListMainLevel;
         musicPlayer = new MusicPlayer(musicPlaylist);
         hiloMusica = new Thread(musicPlayer, "auxiliarMusica");
-        //hiloMusica.start();
+        hiloMusica.start();
     }
 
     @Override
@@ -260,7 +260,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         }
         if (!levelSwitched) {
             if (player.isTouchingLap()) {
-                if (currentWorld == 1) {
+                if (currentWorld == 10) {
                     endMinigame = true;
                 } else {
                     currentWorld++;
@@ -279,6 +279,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
 
     public void resetLevel(int flagStatus, WorldPlat world) {
         if (player.isReset()) {
+            player.setShowStamp(false);
             currentButtonsPressed = 0;
             world.restoreElevators();
             setFlagFalse(flagStatus);

@@ -58,7 +58,7 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
                 insertData();
                 phase = -1;
             }
-            if (points >= 7 && !flag1) {
+            if (points >= 15 && !flag1) {
                 // Con esto da inicio a la generacion de los primeros enemigos
                 phase = 1;
                 // Se guarda un Checkpoint 1, rellenando los datos del txt
@@ -67,7 +67,7 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
                 flag1 = !flag1;
                 temporaryWorld.clearScreenEntities();
                 temporaryWorld.setGenerateEnemys(false);
-            } else if (points >= 10 && !flag2) {
+            } else if (points >= 25 && !flag2) {
                 // Con esto se da inicio a la generacion de los segundos enemigos
                 phase = 2;
                 // Se guarda un Checkpoint 2, rellenando los datos del txt
@@ -76,7 +76,7 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
                 flag2 = !flag2;
                 temporaryWorld.clearScreenEntities();
                 temporaryWorld.generateEnemys();
-            } else if (points >= 12 && !flag3) {
+            } else if (points >= 40 && !flag3) {
                 //Generacion del boss y solo quedan asteorides
                 phase = 3;
                 // Se guarda un Checkpoint 3, rellenando los datos del txt
@@ -135,6 +135,7 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
 
     @Override
     public void finishLevel() {
+        musicPlayer.kill();
         state.setGameFinished();
     }
 
