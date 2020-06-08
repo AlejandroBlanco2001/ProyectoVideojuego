@@ -46,10 +46,25 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
     }
 
     public void init() {
-        musicPlaylist = AudioLoader.musicPlayListMainLevel;
-        musicPlayer = new MusicPlayer(musicPlaylist);
-        hiloMusica = new Thread(musicPlayer, "auxiliarMusica");
-        hiloMusica.start();
+        if (state.getGsm().getCurrentState() == 1) {
+            musicPlaylist = AudioLoader.musicPlayListMainLevel;
+            musicPlayer = new MusicPlayer(musicPlaylist);
+            hiloMusica = new Thread(musicPlayer, "auxiliarMusica");
+            hiloMusica.start();
+        }
+        flag1 = false;
+        flag2 = false;
+        flag3 = false;
+        flag4 = false;
+        flag5 = false;
+        flag6 = false;
+        flag7 = false;
+        flag8 = false;
+        flag9 = false;
+        flag10 = false;
+        levelSwitched = false;
+        currentWorld = 1;
+        minigames = 0;
     }
 
     @Override

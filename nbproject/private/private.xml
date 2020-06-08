@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/MainLevel.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/SecondMinigame/HUD.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/MainLevelUpManager.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/LevelUpManager.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/WorldGenerator/WorldPlat.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/Level2State.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/GameState.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/DialogueLoader.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/SecondMinigame/Level2UpManager.java</file>
         </group>
     </open-files>
 </project-private>

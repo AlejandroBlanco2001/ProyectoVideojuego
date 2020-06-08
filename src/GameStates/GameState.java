@@ -36,6 +36,10 @@ public abstract class GameState {
         return levelTag;
     }
 
+    public GameStateManager getGsm() {
+        return gsm;
+    }
+   
     // Manera de acceder a los datos, de quien se encargue
     public abstract void getInsertData();
 
