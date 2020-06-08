@@ -8,6 +8,8 @@ import MainG.Handler;
 import SecondMinigame.HUD;
 import Tilemaps.Animation;
 import Tilemaps.Assets;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -25,7 +27,7 @@ public class DownEnemy extends Enemy {
         super(handler, manager, x, y, width, height, hud);
         this.hud = hud;
         this.setHealth(20);
-        Ymove = (int) (Math.random() * 100 + 300);
+        Ymove = (int) (Math.random() * 5 + 2);
         bounds.x = 0;
         bounds.y = 0;
         bounds.width = 104;
@@ -67,12 +69,12 @@ public class DownEnemy extends Enemy {
             if (this.y <= 40) {
                 updownswitch = !updownswitch;
             }
-            this.y -= Ymove * handler.getDeltaTime();
+            this.y -= Ymove;
         } else {
             if (this.y >= 580) {
                 updownswitch = !updownswitch;
             }
-            this.y += Ymove * handler.getDeltaTime();
+            this.y += Ymove;
         }
     }
 

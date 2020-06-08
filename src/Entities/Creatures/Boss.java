@@ -13,6 +13,7 @@ import SecondMinigame.HUD;
 import Tilemaps.Animation;
 import Tilemaps.Assets;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -37,7 +38,7 @@ public class Boss extends Enemy {
         last = System.currentTimeMillis();
         this.setHealth(300);
         this.setSpeed(10);
-        speed = 200;
+        speed = 1;
         bounds.x = 0;
         bounds.y = 0;
         bounds.width = 100;
@@ -46,7 +47,7 @@ public class Boss extends Enemy {
     }
 
     @Override
-    public void die(){
+    public void die() {
     }
 
     @Override
@@ -67,7 +68,6 @@ public class Boss extends Enemy {
 
     }
 
-    @Override
     public void render(Graphics2D g) {
         g.setColor(Color.red);
         if (tackling == false) {
@@ -92,16 +92,16 @@ public class Boss extends Enemy {
             moveY();
             y += Ymove;
             if (x > 980) {
-                x -= speed * handler.getDeltaTime();
+                x -= speed;
             }
         }
     }
 
     private void moveY() {
         if (y > manager.getPlayer().getY()) {
-            Ymove = (float) (-speed * handler.getDeltaTime());
+            Ymove = -speed;
         } else if (y < manager.getPlayer().getY()) {
-            Ymove = (float) (speed * handler.getDeltaTime());
+            Ymove = speed;
         } else {
             Ymove = 0;
         }

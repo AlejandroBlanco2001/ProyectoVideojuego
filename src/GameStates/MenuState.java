@@ -47,6 +47,7 @@ public class MenuState extends GameState implements SaveGame {
     private UIManager uimanager;
     public UIImageButton exit, option, newg, continu, tutorial;
 
+
     public MenuState(GameStateManager gsm, Handler handler) {
         super(gsm);
         this.handler = handler;
@@ -76,8 +77,7 @@ public class MenuState extends GameState implements SaveGame {
         uimanager.addUIObject(continu = new UIImageButton(50f, 380f, 256, 57, Assets.UIMenu[7], new ClickListener() {
             @Override
             public void onClick() {
-                musicPlayer.kill();
-                loadData();
+
             }
         }));
 
@@ -173,7 +173,7 @@ public class MenuState extends GameState implements SaveGame {
         long now = System.currentTimeMillis();
         if (Window.keyManager.space) {
             bgMusic.stop();
-            gsm.setState(3);
+            gsm.setState(5);
         }
         // Opcion de continuar donde se habia dejado la partida
         if (Window.keyManager.enter) {
@@ -200,6 +200,7 @@ public class MenuState extends GameState implements SaveGame {
                 currentChoice = 1;
             }
         }
+
         lastPressedTime = now;
     }
 
@@ -272,14 +273,16 @@ public class MenuState extends GameState implements SaveGame {
         subState = Integer.parseInt(subStateVerification);
         // Se verifica si el State cargado por el TXT, no es nulo. Si este es nulo indica que el juego se cerro y se abrio de nuevo para crear el State, de lo contaro se carga normalmente con el reloadState.
         if (!gsm.VerificarReinicioJuego(state)) {
-            gsm.reloadState(state);  // Se recarga el juego
-            gsm.getGameStates()[1].getLoadData();// Se insertan los datos del txt   
-        } else {
-            if (subState == 2 || subState == 3) {
+            if (gsm.isOnMinigame(subState)) {
                 subState = gsm.getMinigame(subState);
                 gsm.reloadState(subState);
                 gsm.getGameStates()[subState].getLoadData();
+            } else {
+                gsm.reloadState(state);  // Se recarga el juego
+                gsm.getGameStates()[state].getLoadData(); // Se insertan los datos del txt
             }
+        } else {
+            gsm.setState(state); // Se crea el state donde termino el guardado, toca verificar a futuro, como enlazarlo con el acceso a superiores ( del 1 a 3 y a 2)
         }
     }
 
@@ -323,7 +326,7 @@ public class MenuState extends GameState implements SaveGame {
     public Music getMusic() {
         return bgMusic;
     }
-
+   
     // Codigo tomado de https://stackoverflow.com/questions/29878237/java-how-to-clear-a-text-file-without-deleting-it/42282671
     // Autor: Ankur Anand
     public void clearFile(String file) {

@@ -1,6 +1,8 @@
 package Entities.Creatures;
 
 import Audio.AudioLoader;
+import static Audio.AudioLoader.backInTime;
+import static Audio.AudioLoader.jumpSound;
 import Entities.EntityManager;
 import MainG.Handler;
 import MainG.Window;
@@ -594,8 +596,4 @@ public class MainPlayer extends Character {
         this.gravity = gravity;
     }
 
-    public void setShowStamp(boolean showStamp) {
-        this.showStamp = showStamp;
-    }
-    
 }
