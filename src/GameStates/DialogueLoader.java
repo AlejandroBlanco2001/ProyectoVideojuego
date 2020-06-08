@@ -22,6 +22,11 @@ public class DialogueLoader {
 
     public DialogueLoader(Handler handler) {
         this.handler = handler;
+        tutorialState = 1;
+        timeAnimation = 1;
+        info = 0;
+        timeAnimationMark = 50;
+        dialogueMark = true;
     }
 
     public void render(Graphics2D g) {
@@ -170,7 +175,7 @@ public class DialogueLoader {
     public void setInfo(int info) {
         this.info = info;
     }
-    
+
     public void setGameTag(String level) {
         this.levelTag = level;
     }

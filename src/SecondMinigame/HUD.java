@@ -14,6 +14,7 @@ public class HUD {
 
     public HUD(EntityManager manager) {
         this.manager = manager;
+        points = 0;
     }
 
     public void render(Graphics2D g) {

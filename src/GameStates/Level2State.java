@@ -119,4 +119,10 @@ public class Level2State extends GameState {
     private Image getCurrentFrame() {
         return background.getCurrentFrame();
     }
+
+    public GameStateManager getGsm() {
+        return gsm;
+    }
+    
+    
 }
