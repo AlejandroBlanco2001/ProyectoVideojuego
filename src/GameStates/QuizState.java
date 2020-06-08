@@ -144,6 +144,12 @@ public class QuizState extends GameState {
                     d.setNewInformation("Correcta");
                     break;
                 default:
+                    WorldLibrary auxW = (WorldLibrary) gsm.getGameStates()[2].getWorld();
+                    gsm.getGameStates()[1].getLoadData();
+                    MainLevel auxS = (MainLevel) gsm.getGameStates()[1];
+                    auxS.getLevelManager().setFinishedMinigame();
+                    auxW.setFinished();
+                    gsm.reloadState(1);
                     break;
             }
             getInput();
@@ -205,7 +211,7 @@ public class QuizState extends GameState {
             }
         } else {
             g.drawString("Obtuviste" + correctas, i, i);
-            
+
         }
     }
 

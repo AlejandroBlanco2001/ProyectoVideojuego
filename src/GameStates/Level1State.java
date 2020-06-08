@@ -32,10 +32,9 @@ public class Level1State extends GameState {
         dialogueLoader = new DialogueLoader(handler);
         dialogueLoader.setGameTag(this.levelTag);
         this.entityManager = this.world.getEntityM();
-        uimanager= new UIManager(handler);
+        uimanager = new UIManager(handler);
         uimanager.addUIObject(new UIHelper(Assets.UIHelperLvl1,5000,230,457,600,253,uimanager));
         this.levelManager = new Level1UpManager(this, world, entityManager);
-
         init();
     }
 
@@ -60,15 +59,6 @@ public class Level1State extends GameState {
 
     public void setGameFinished() {
         this.gsm.setState(5);
-    }
-
-    public void setGameFinished() {
-        WorldLibrary auxW = (WorldLibrary) world.cast(levelManager);
-        gsm.getGameStates()[1].getLoadData();
-        MainLevel auxS = (MainLevel) gsm.getGameStates()[1];
-        auxS.getLevelManager().setFinishedMinigame();
-        auxW.setFinished();
-        gsm.reloadState(1);
     }
 
     @Override

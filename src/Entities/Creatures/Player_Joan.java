@@ -2,14 +2,12 @@ package Entities.Creatures;
 
 import Entities.Entity;
 import Entities.EntityManager;
-import Entities.Items.Bullet;
 import Tilemaps.Tile;
 import Entities.Static.BookPile;
 import Tilemaps.Animation;
 import MainG.Handler;
 import MainG.Window;
 import Tilemaps.Assets;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -44,6 +42,7 @@ public class Player_Joan extends Character {
             bounds.width=35;
             bounds.height=60;
          */
+        
         bounds.x = 40;
         bounds.y = 65;
         bounds.width = 52;
@@ -105,8 +104,6 @@ public class Player_Joan extends Character {
         attackTimer = 0;
 
         for (Entity en : manager.getEntities()) {
-
-            //System.out.println("" + en.getCollisionBounds(0, 0));
             if (!en.equals(this)) {
                 if (en.getCollisionBounds(0, 0).intersects(ar)) {
                     BookPile book = (BookPile) en;
@@ -198,10 +195,10 @@ public class Player_Joan extends Character {
      * @param y Coordenada en Y
      * @return Retorna un booleano que indica si se está chocando con un tile que es SOLIDO.
      */
+    
     @Override
     protected boolean collisionWithTile(int x, int y) {
-        return false;
-//return handler.getWorld().getTile(x, y).isSolid();
+        return handler.getWorld().getTile(x, y).isSolid();
     }
 
     public Rectangle getBounds() {

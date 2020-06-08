@@ -85,7 +85,7 @@ public class MenuState extends GameState implements SaveGame {
                 musicPlayer.kill();
                 clearFile("saveGeneralFile.txt");
                 clearFile("savefile.txt");
-                gsm.setState(3);
+                gsm.setState(1);
             }
         }));
         uimanager.addUIObject(new UIHelper(Assets.UIHelperMenu, 8000, 540, 430, 475, 200));
@@ -155,19 +155,18 @@ public class MenuState extends GameState implements SaveGame {
         bgMusic = AudioLoader.bgMusic;
         musicPlayer = new MusicPlayer(bgMusic);
         hiloMusica = new Thread(musicPlayer, "auxiliarThreadForMusic");
-        //hiloMusica.start();
+        hiloMusica.start();
         menuUp = AudioLoader.upMenu;
     }
 
     public void handleInput() {
         long now = System.currentTimeMillis();
         if (Window.keyManager.space) {
-            bgMusic.stop();
-            gsm.setState(5);
+            gsm.setState(1);
         }
         // Opcion de continuar donde se habia dejado la partida
         if (Window.keyManager.enter) {
-            optionPicker();
+            
         }
         if (Window.keyManager.test) {
             optionPicker();
@@ -190,6 +189,7 @@ public class MenuState extends GameState implements SaveGame {
                 currentChoice = 1;
             }
         }
+
         lastPressedTime = now;
     }
 
@@ -322,7 +322,7 @@ public class MenuState extends GameState implements SaveGame {
             fwOb = new FileWriter(file, false);
         } catch (IOException ex) {
             Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
-        }
+}
         PrintWriter pwOb = new PrintWriter(fwOb, false);
         pwOb.flush();
         pwOb.close();

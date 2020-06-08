@@ -95,7 +95,7 @@ public class GameStateManager {
     }
 
     public void preLoadState() {
-        gameStates[MAINLEVELSTATE] = new MainLevel(this,handler, "Main Level")
+        gameStates[MAINLEVELSTATE] = new MainLevel(this,handler, "Main Level");
         gameStates[LEVEL1STATE] = new Level1State(this, handler, "Level 2");
         gameStates[LEVEL2STATE] = new Level2State(this, handler, "Level 3");
     }
@@ -152,35 +152,6 @@ public class GameStateManager {
         if(subState == 1){
             return LEVEL1STATE;
         }else{
-            return LEVEL2STATE;
-        }
-    }
-
-    public int getCurrentState() {
-        return currentState;
-    }
-
-    // Se encarga de verificar, si en el TXT de guardado, en la primera linea esta vacia, lo que indica que el juego es la primera vez que se inicia
-    boolean VerificarReinicioJuego(int state) {
-        if (gameStates[state] == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    boolean isOnMinigame(int subState) {
-        if (subState == 1 || subState == 3) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public int getMinigame(int subState) {
-        if (subState == 1) {
-            return LEVEL1STATE;
-        } else {
             return LEVEL2STATE;
         }
     }

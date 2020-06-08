@@ -27,10 +27,7 @@ public class MainLevel extends GameState {
         this.world = new WorldPlat(handler, entityManager, path, this);
         this.levelManager = new MainLevelUpManager(world, entityManager, this);
         uimanager= new UIManager(handler);
-        
         uimanager.addUIObject(new UIHelper(Assets.UIHelperMain,5000,400,30,475,200));
-        
-        Window.mouse.setUIManager(uimanager);
         init();
     }
 

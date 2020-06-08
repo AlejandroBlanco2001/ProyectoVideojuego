@@ -24,7 +24,7 @@ public class UIManager {
         objects= new ArrayList<UIObject>();
     }
     
-//Getters y Setters
+    //Getters y Setters
     public Handler getHandler() {
         return handler;
     }
@@ -41,7 +41,7 @@ public class UIManager {
         this.objects = objects;
     }
     
-//Métodos
+    //Métodos
     public void tick(){
         for (UIObject o : objects) {
             o.tick();
