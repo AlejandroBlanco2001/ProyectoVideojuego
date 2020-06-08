@@ -50,7 +50,7 @@ public class AerialEnemy extends Enemy {
         this.height = 99;
         //Vida y velocidad
         this.setHealth(15);
-        speed = 1;
+        this.speed = 300;
         //Hitbox
         bounds.x = 0;
         bounds.y = 0;
@@ -78,7 +78,7 @@ public class AerialEnemy extends Enemy {
             movex();
             x += Xmove;
             if (y < 0) {
-                y += speed;
+                y += speed * handler.getDeltaTime();
             }
         }
 
@@ -90,9 +90,9 @@ public class AerialEnemy extends Enemy {
      */
     public void movex() {
         if (x > manager.getPlayer().getX() + manager.getPlayer().getWidth() / 2) {
-            Xmove = -speed;
+            Xmove = (float) (-speed * handler.getDeltaTime());
         } else if (x < manager.getPlayer().getX() + manager.getPlayer().getWidth() / 2) {
-            Xmove = speed;
+            Xmove = (float) (speed * handler.getDeltaTime());
         } else {
             Xmove = 0;
         }
@@ -102,6 +102,7 @@ public class AerialEnemy extends Enemy {
      * Metodo para reenderizar al enemigo.  
      * @param g Los graficos para reenderizarlo.
      */
+
     @Override
     public void render(Graphics2D g) {
         g.drawImage(getCurrentAnimationFrame(), (int) x, 0, null);

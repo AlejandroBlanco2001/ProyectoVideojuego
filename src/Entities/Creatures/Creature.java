@@ -2,9 +2,7 @@ package Entities.Creatures;
 
 import Entities.Entity;
 import Entities.EntityManager;
-import MainG.GamePanel;
 import MainG.Handler;
-import java.awt.Graphics;
 
 public abstract class Creature extends Entity{
     
@@ -22,6 +20,7 @@ public abstract class Creature extends Entity{
         super(handler,manager,x,y,width,height);
         speed=DEFAULT_SPEED;
     }
+    
 
     public void move(){
         x +=Xmove;

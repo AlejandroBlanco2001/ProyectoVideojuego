@@ -10,6 +10,7 @@ import MainG.Handler;
 import MainLevel.Tiles.Chest;
 import MainLevel.Tiles.TileMainLevel;
 import MainLevel.Tiles.ElevatorTile;
+import MainLevel.Tiles.TeleporterTile;
 import Tilemaps.Animation;
 import Tilemaps.Assets;
 import java.awt.Graphics2D;
@@ -152,6 +153,22 @@ public class WorldPlat extends World {
 
     public void changeAnimation() {
         animationParallax = new Animation(30, Assets.spaceBackgroundPlat);
+    }
+
+    public void setTeleporterFalse(boolean model) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                TileMainLevel auxT = (TileMainLevel) getTile(x, y);
+                if (auxT instanceof TeleporterTile) {
+                    TeleporterTile aux = (TeleporterTile) auxT;
+                    if (!model) {
+                        aux.changeSelection();
+                    } else {
+                        aux.returnSelection();
+                    }
+                }
+            }
+        }
     }
 
 }

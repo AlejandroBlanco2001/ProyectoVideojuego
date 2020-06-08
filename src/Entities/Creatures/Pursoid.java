@@ -56,18 +56,18 @@ public class Pursoid extends Creature{
     public void move(){
        
         movex();
-        x+=Xmove;
+        x += Xmove;
         movey();
-        y+=Ymove;
+        y += Ymove;
         
     }
     
     
     public void movex(){
         if(x>manager.getPlayer().getX()+ manager.getPlayer().getWidth()/2){
-            Xmove=-speed;
+            Xmove=(float) (-speed * handler.getDeltaTime()); 
         }else if(x<manager.getPlayer().getX()+ manager.getPlayer().getWidth()/2){
-            Xmove=speed;
+            Xmove=(float) (speed * handler.getDeltaTime());
         }else{
             Xmove=0;
         }
@@ -76,9 +76,9 @@ public class Pursoid extends Creature{
     
     public void movey(){
         if(y>manager.getPlayer().getY()+ manager.getPlayer().getHeight()/2){
-            Ymove=-speed;
+            Ymove=(float) (-speed * handler.getDeltaTime());
         }else if(y<manager.getPlayer().getY()+ manager.getPlayer().getHeight()/2){
-            Ymove=speed;
+            Ymove=(float) (speed * handler.getDeltaTime());
         }else{
             Ymove=0;
         }

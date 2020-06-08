@@ -43,7 +43,7 @@ public class Player extends Character {
         bounds.y = 10;
         bounds.width = 160;
         bounds.height = 60;
-        this.setSpeed(5);
+        this.speed = 500;
         //Solo vidas pares si no quieren que aparezca una vida a la mitad
         this.setHealth(6);
         naveStates[0] = Assets.naveOn;
@@ -92,18 +92,18 @@ public class Player extends Character {
         Ymove = 0;
 
         if (Window.keyManager.up) {
-            Ymove = -speed;
+            Ymove = (float) (-speed * handler.getDeltaTime());
         }
 
         if (Window.keyManager.down) {
-            Ymove = speed;
+            Ymove = (float) (speed * handler.getDeltaTime());
         }
 
         if (Window.keyManager.right) {
-            Xmove = speed;
+            Xmove = (float) (speed * handler.getDeltaTime());
         }
         if (Window.keyManager.left) {
-            Xmove = -speed;
+            Xmove = (float) (-speed * handler.getDeltaTime());
         }
         if (Window.keyManager.space && canShoot(clock - now)) {
             shot.play();
@@ -113,8 +113,6 @@ public class Player extends Character {
 
     @Override
     public void render(Graphics2D g) {
-//        g.setColor(Color.red);
-//        g.fillRect((int) x + bounds.x, (int) y + bounds.y, bounds.width, bounds.height);
         g.drawImage(getCurrentImage(), (int) (x), (int) (y), null);
     }
 

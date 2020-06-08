@@ -30,7 +30,7 @@ public class MusicPlayer implements Runnable {
 
     @Override
     public void run() {
-        if (musicState.size() == 1) {
+        if (musicState.size() == 1 || musicState.size() == 2) {
             currentMusic = musicState.get(0);
             currentIndexMusic = 0;
         } else {
@@ -63,6 +63,7 @@ public class MusicPlayer implements Runnable {
     
     public void switchSong(){
         if(musicState.size() > 1){
+            currentMusic.stop();
             currentMusic = musicState.get(currentIndexMusic + 1);
         }
     }

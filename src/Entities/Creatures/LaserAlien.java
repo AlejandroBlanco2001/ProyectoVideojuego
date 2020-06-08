@@ -52,9 +52,9 @@ public class LaserAlien extends Creature {
             shootRay();
         } else {
             movex();
-            x += Xmove;
+            x += Xmove ;
             if (y < 0) {
-                y += speed;
+                y += speed * handler.getDeltaTime();
             }
         }
 
@@ -62,9 +62,9 @@ public class LaserAlien extends Creature {
 
     public void movex() {
         if (x > manager.getPlayer().getX() + manager.getPlayer().getWidth() / 2) {
-            Xmove = -speed;
+            Xmove = (float) (-speed * handler.getDeltaTime());
         } else if (x < manager.getPlayer().getX() + manager.getPlayer().getWidth() / 2) {
-            Xmove = speed;
+            Xmove = (float) (speed * handler.getDeltaTime());
         } else {
             Xmove = 0;
         }

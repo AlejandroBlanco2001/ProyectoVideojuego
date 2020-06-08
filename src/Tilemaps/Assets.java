@@ -76,7 +76,7 @@ public class Assets implements Runnable {
         enemy = ImageLoader.loadImage(("/Tilesets/Pursoid.png"));
         pursoid = ImageLoader.loadImage("/Tilesets/Pursoid.png");
         LaserAlien = ImageLoader.loadImage("/Tilesets/LaserAlien.png");
-        laser = ImageLoader.loadImage("/Tilesets/laser.png");
+        laser = ImageLoader.loadImage("/Tilesets/Laser.png");
         Title = ImageLoader.loadImage("/UI/Title.png");
         Title2 = ImageLoader.loadImage("/UI/Title2.png");
         SpriteSheet sheetAsteroids = new SpriteSheet(ImageLoader.loadImage("/Sprites/Tilesets/Sheetasteroids.png"));
@@ -155,7 +155,7 @@ public class Assets implements Runnable {
         vida = sheetVida.crop(0, 0, 125, 201);
         halfLife = sheetVida.crop(266, 0, 125, 201);
         floor = ImageLoader.loadImage("/Testers/Floor.png");
-        library = ImageLoader.loadImage("/Testers/library.png");
+        library = ImageLoader.loadImage("/Testers/Library.png");
         CursorSpace = ImageLoader.loadImage("/Testers/spaceship.png");
         naveSemiOff = ImageLoader.loadImage("/Player/naveSemi.png");
         BookPile = ImageLoader.loadImage("/Testers/BookPile.png");
@@ -171,7 +171,7 @@ public class Assets implements Runnable {
         platTiles = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_2.png");
         rightSing = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Sign_arrowRight.png");
         wallTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_8.png");
-        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_10.png");
+        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_10.png");
         pyramidFill_1 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_7.png");
         pyramidFill_2 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_6.png");
         pyramidFill_3 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_5.png");
@@ -185,7 +185,7 @@ public class Assets implements Runnable {
         cargarAnimacionTeleporter();
         minimize[0] = ImageLoader.loadImage("/UI/minimize.png");
         minimize[1] = ImageLoader.loadImage("/UI/minimizeHover.png");
-        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_14.png");
+        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_14.png");
         fillPortal();
         fillBackgroundSpacePlat();
         fillBackgroundCityPlat();
@@ -323,7 +323,11 @@ public class Assets implements Runnable {
     }
     
     public static int randomNumberEffectGenerator(){
-        return (int) (Math.random() * 13 + 1);
+        int random = (int) (Math.random() * 13 + 1);
+        while(random == 2){
+            random = (int) (Math.random() * 13 + 1);
+        }
+        return random;
     }
 
     @Override

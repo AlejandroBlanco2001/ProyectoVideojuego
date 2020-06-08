@@ -41,7 +41,7 @@ public class Asteroid extends Creature {
 
         this.width = (int) (Math.random() * 70 + 30);
         this.height = this.width;
-        Xmove = (int) (Math.random() * 3 + 1);
+        Xmove = (int) (Math.random() * 200 + 300);
 
         bounds.x = 0;
         bounds.y = 0;
@@ -76,7 +76,7 @@ public class Asteroid extends Creature {
      */
     @Override
     public void move() {
-        this.x -= Xmove;
+        this.x -= Xmove * handler.getDeltaTime();
     }
 
     public void getState() {

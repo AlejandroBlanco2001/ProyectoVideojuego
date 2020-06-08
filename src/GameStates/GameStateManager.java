@@ -65,25 +65,27 @@ public class GameStateManager {
                 gameStates[state] = new Level1State(this, this.handler, "Level 2");
                 break;
             case LEVEL2STATE:
-                gameStates[state] = new Level2State(this, handler, "Level 3");    
+                gameStates[state] = new Level2State(this, handler, "Level 3");
+                break;
             case QUIZSTATE:
                 gameStates[state] = new QuizState(this);
+                break;
         }
     }
 
     public void update(double deltaTime) {
-        if(gameStates[currentState] != null){
+        if (gameStates[currentState] != null) {
             gameStates[currentState].update();
-        }else{
+        } else {
             System.out.println("CARGANDO");
         }
         this.deltaTime = deltaTime;
     }
 
     public void draw(Graphics2D g) {
-        if(gameStates[currentState] != null){
+        if (gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
-        }else{
+        } else {
             System.out.println("CARGANDO");
         }
     }
@@ -93,6 +95,7 @@ public class GameStateManager {
     }
 
     public void preLoadState() {
+        gameStates[MAINLEVELSTATE] = new MainLevel(this, this.handler, "Level 1");
         gameStates[LEVEL1STATE] = new Level1State(this, handler, "Level 2");
         gameStates[LEVEL2STATE] = new Level2State(this, handler, "Level 3");
     }
@@ -137,17 +140,17 @@ public class GameStateManager {
     }
 
     boolean isOnMinigame(int subState) {
-        if(subState == 1 || subState == 3){
+        if (subState == 1 || subState == 3) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     public int getMinigame(int subState) {
-        if(subState == 1){
+        if (subState == 1) {
             return LEVEL1STATE;
-        }else{
+        } else {
             return LEVEL2STATE;
         }
     }
@@ -155,5 +158,5 @@ public class GameStateManager {
     public int getCurrentState() {
         return currentState;
     }
-    
+
 }
