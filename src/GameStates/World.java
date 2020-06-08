@@ -46,4 +46,8 @@ public abstract class World {
             return world;
         }
     }
+    
+    public EntityManager getEntityM() {
+        return entityM;
+    }
 }

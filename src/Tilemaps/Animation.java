@@ -40,6 +40,8 @@ public class Animation {
     }
     
 
-    
+    public void setIndex(int j){
+        index=j;
+    }
     
 }

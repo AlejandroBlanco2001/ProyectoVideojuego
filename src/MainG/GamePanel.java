@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     //Dimensiones del game panel
     public static final int WIDTH_G = 1080;
     public static final int HEIGHT_G = 720;
-
+    
     //Hilo del  juego y Game Loop
     private Thread hiloPrinicipal;
 
@@ -48,10 +48,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     private boolean finishedGame = false;
     private boolean videoPlayed = true;
-    
     //GameStateManager
     GameStateManager gsm;
-
+    
     //Imagenes
     private BufferedImage image;
     private Graphics2D g;
@@ -106,6 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
         //  Contador para los FPS 
         long referencerTimer = System.nanoTime();
         double timePassed; // Tiempo trasncurrido por cuadro
+        double delta = 0; // Cantidad de tiempo hasta actualizacion
         while (running && !finishedGame) {
             final long beginLoop = System.nanoTime(); // Cronometro que inicia el juego
             // tiempo desde el ultimo cuadro cargado, Delta Time para el movement
@@ -201,7 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GameStateManager getGsm() {
         return gsm;
-    }
+}
 
     public void setVideoPlayed(boolean videoPlayed) {
         this.videoPlayed = videoPlayed;

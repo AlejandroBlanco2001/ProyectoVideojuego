@@ -175,7 +175,7 @@ public class DialogueLoader {
     public void setInfo(int info) {
         this.info = info;
     }
-
+    
     public void setGameTag(String level) {
         this.levelTag = level;
     }

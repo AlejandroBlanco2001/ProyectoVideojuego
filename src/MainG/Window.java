@@ -47,7 +47,7 @@ public class Window extends JFrame {
         //Se define lo que sucede si presiona la x en la esquina superior
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(this.panel);
-
+        
         //Evita que el usuario modifique las dimensiones
         setResizable(false);
         pack();
@@ -62,12 +62,12 @@ public class Window extends JFrame {
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
         setIconImage(Assets.CursorSpace);
-        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(Assets.CursorSpace, new Point(mouse.getMouseX(), mouse.getMouseY()), "ef"));
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(Assets.CursorSpace,new Point(mouse.getMouseX(),mouse.getMouseY()), "ef"));
     }
 
     public void setVideo() {
         Canvas c = new Canvas();
-        c.setSize(1080, 720);
+        c.setSize(1080,720);
         c.setBackground(Color.black);
         c.setVisible(true);
         this.getContentPane().add(c);

@@ -10,8 +10,8 @@ public class Assets implements Runnable {
             retroFloor, rowTile, platTile, empty, chest, elevatorTile, spikes, enigmaMachineTeleporter,
             floorDecorator1, platTiles, rightSing, wallTile, levelerTile, pyramidFill_1, pyramidFill_2, pyramidFill_3,
             spaceFloor, spaceWall, spaceWall2, spaceChest, spaceCrate, spaceBlocker, spaceTeleporter,
-            CursorSpace, lastBackground, fondo8bits,
-            Title, Title2;
+            CursorSpace, lastBackground, fondo8bits,pauseBackgroundLvl1,pauseBackgroundLvl2,pauseBackgroundMain,
+            Title, Title2, Answer,AnswerHover, MenuMain, Menu1,QuitLvl2,Table;
 
     public static BufferedImage cityPlataformerBackground[] = new BufferedImage[56];
     public static BufferedImage playerDown[] = new BufferedImage[2];
@@ -39,6 +39,13 @@ public class Assets implements Runnable {
 
     public static BufferedImage aerialEnemy[] = new BufferedImage[4];
     public static BufferedImage downEnemy[] = new BufferedImage[4];
+    
+    public static BufferedImage BookOpenning[] = new BufferedImage[6];
+    public static BufferedImage Books[] = new BufferedImage[6];
+    public static BufferedImage[] QuizBook= new BufferedImage[18];
+    
+    public static BufferedImage Questions[]= new BufferedImage[6];
+    public static BufferedImage QuizAnswers[]= new BufferedImage[6];
 
     public static BufferedImage teleporterTile[] = new BufferedImage[9];
     public static BufferedImage Boss[] = new BufferedImage[2];
@@ -52,6 +59,13 @@ public class Assets implements Runnable {
     public static BufferedImage UILvl2[] = new BufferedImage[9];
     public static BufferedImage UIMenu[] = new BufferedImage[9];
     public static BufferedImage UIMainLvl[] = new BufferedImage[9];
+    
+    public static BufferedImage UIHelperMenu[] = new BufferedImage[7];
+    public static BufferedImage UIHelperMain[] = new BufferedImage[3];
+    public static BufferedImage UIHelperLvl1[]= new BufferedImage[2];
+    public static BufferedImage UIHelperLvl2[] = new BufferedImage[2];
+    
+    
 
     private static final int WIDHT = 131;
     private static final int HEIGHT = 110;
@@ -70,15 +84,26 @@ public class Assets implements Runnable {
         SpriteSheet sheetR = new SpriteSheet(ImageLoader.loadImage("/Sprites/Tilesets/SheetRight.png"));
         spriteNina = sheet.crop(0, 0, WIDHT, HEIGHT);
         fondoSpaceInvaders = ImageLoader.loadImage("/Backgrounds/spaceInvaders.png");
+        pauseBackgroundLvl1 = ImageLoader.loadImage("/Backgrounds/pauseBackgroundLvl1.png");
+        pauseBackgroundLvl2 = ImageLoader.loadImage("/Backgrounds/pauseBackgroundLvl2.png");
+        pauseBackgroundMain = ImageLoader.loadImage("/Backgrounds/pauseBackgroundMain.png");
+        Table = ImageLoader.loadImage("/Backgrounds/Table.png");
         naveOff = ImageLoader.loadImage("/Player/naveOff.png");
         naveOn = ImageLoader.loadImage("/Player/naveOn.png");
         astronautTalker = ImageLoader.loadImage("/HUD/HUD_DIALOGUE.png");
         enemy = ImageLoader.loadImage(("/Tilesets/Pursoid.png"));
         pursoid = ImageLoader.loadImage("/Tilesets/Pursoid.png");
         LaserAlien = ImageLoader.loadImage("/Tilesets/LaserAlien.png");
-        laser = ImageLoader.loadImage("/Tilesets/Laser.png");
+        laser = ImageLoader.loadImage("/Tilesets/laser.png");
         Title = ImageLoader.loadImage("/UI/Title.png");
         Title2 = ImageLoader.loadImage("/UI/Title2.png");
+        Answer = ImageLoader.loadImage("/UI/Answer.png");
+        AnswerHover = ImageLoader.loadImage("/UI/Answer2.png");
+        MenuMain = ImageLoader.loadImage("/UI/MenuMain.png");
+        Menu1 = ImageLoader.loadImage("/UI/Menu1.png");
+        QuitLvl2 = ImageLoader.loadImage("/UI/QuitLvl2.png");
+        
+        
         SpriteSheet sheetAsteroids = new SpriteSheet(ImageLoader.loadImage("/Sprites/Tilesets/Sheetasteroids.png"));
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -101,6 +126,40 @@ public class Assets implements Runnable {
             }
         }
 
+        for (int i = 0; i < 6; i++) {
+            Books[i]=ImageLoader.loadImage("/UI/Book"+(i+1)+".png");
+        }
+        
+        for (int i = 0; i < 18; i++) {
+            QuizBook[i]=ImageLoader.loadImage("/UI/frame-"+(i+1)+".png");
+        }
+        
+        for (int i = 0; i < 6; i++) {
+            Questions[i]=ImageLoader.loadImage("/UI/Pregunta "+(i+1)+".1.png");
+        }
+        for (int i = 0; i < 6; i++) {
+            QuizAnswers[i]=ImageLoader.loadImage("/UI/Pregunta "+(i+1)+".2.png");
+        }
+        
+        
+        
+        for (int i = 0; i < 7; i++) {
+            UIHelperMenu[i]=ImageLoader.loadImage("/UI/UIHelper/UIHelperMenu-"+(i+1)+".png");
+        }
+        for (int i = 0; i < 2; i++) {
+            UIHelperLvl1[i]=ImageLoader.loadImage("/UI/UIHelper/UIHelperLvl1-"+(i+1)+".png");
+        }
+        for (int i = 0; i < 3; i++) {
+            UIHelperMain[i]=ImageLoader.loadImage("/UI/UIHelper/UIHelperMain-"+(i+1)+".png");
+        }
+        for (int i = 0; i < 2; i++) {
+            UIHelperLvl2[i]=ImageLoader.loadImage("/UI/UIHelper/UIHelperLvl2-"+(i+1)+".png");
+        }
+        
+        for (int i = 0; i < 6; i++) {
+            BookOpenning[i]=ImageLoader.loadImage("/UI/Book-"+(i+1)+".gif");
+        }
+        
         for (int i = 0; i < 23; i++) {
             backgroundMenu[i] = ImageLoader.loadImage("/Backgrounds/MainBackground/frame-" + (i + 1) + ".gif");
             if (i == 22) {
@@ -155,7 +214,7 @@ public class Assets implements Runnable {
         vida = sheetVida.crop(0, 0, 125, 201);
         halfLife = sheetVida.crop(266, 0, 125, 201);
         floor = ImageLoader.loadImage("/Testers/Floor.png");
-        library = ImageLoader.loadImage("/Testers/Library.png");
+        library = ImageLoader.loadImage("/Testers/library.png");
         CursorSpace = ImageLoader.loadImage("/Testers/spaceship.png");
         naveSemiOff = ImageLoader.loadImage("/Player/naveSemi.png");
         BookPile = ImageLoader.loadImage("/Testers/BookPile.png");
@@ -171,7 +230,7 @@ public class Assets implements Runnable {
         platTiles = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_2.png");
         rightSing = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Sign_arrowRight.png");
         wallTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_8.png");
-        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_10.png");
+        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_10.png");
         pyramidFill_1 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_7.png");
         pyramidFill_2 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_6.png");
         pyramidFill_3 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_5.png");
@@ -180,12 +239,12 @@ public class Assets implements Runnable {
         spaceWall2 = ImageLoader.loadImage("/SpritesMainLevel/Space/Tile_6.png");
         spaceCrate = ImageLoader.loadImage("/SpritesMainLevel/Space/crate.png");
         spaceBlocker = ImageLoader.loadImage("/SpritesMainLevel/Space/blocker.png");
-        spaceTeleporter = ImageLoader.loadImage("/SpritesMainLevel/Space/teleporteSpace.png");
+        spaceTeleporter = ImageLoader.loadImage("/SpritesMainLevel/Space/teleporterNave.png");
         cargaSpikes(spikeSheet);
         cargarAnimacionTeleporter();
         minimize[0] = ImageLoader.loadImage("/UI/minimize.png");
         minimize[1] = ImageLoader.loadImage("/UI/minimizeHover.png");
-        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_14.png");
+        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_14.png");
         fillPortal();
         fillBackgroundSpacePlat();
         fillBackgroundCityPlat();
@@ -321,7 +380,7 @@ public class Assets implements Runnable {
         mainPlayerRunningR[2] = image[13];
         mainPlayerRunningR[3] = image[19];
     }
-    
+
     public static int randomNumberEffectGenerator(){
         int random = (int) (Math.random() * 13 + 1);
         while(random == 2){

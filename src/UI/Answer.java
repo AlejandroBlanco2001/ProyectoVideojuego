@@ -35,11 +35,12 @@ public class Answer extends UIObject{
     @Override
     public void render(Graphics g) {
         if(hovering){
-            g.drawImage(Assets.naveOff, (int) x, (int) (y), null);
+            g.drawImage(Assets.AnswerHover, (int) x, (int) (y),width,height, null);
+            g.setColor(Color.RED);
         }else{
-            g.drawImage(Assets.naveOn, (int) x, (int) (y), null);
+            g.drawImage(Assets.Answer, (int) x, (int) (y),width,height, null);
+            g.setColor(Color.BLACK);
         }
-        g.setColor(Color.BLACK);
         g.drawString(information,(int) x,(int) y);
     }
 

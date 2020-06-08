@@ -98,3 +98,31 @@ Version 2.7
 -Se realizan diversos cambios a la ventana
 -Se añaden elemntos para mejorar el UI/UX
 -Se cambian varios sprites y el background
+
+Version 2.7b
+-Se actualiza el changelog
+
+Version 2.8
+- Se pule la mecánica de salto, para tener un menor margen de error
+- Se añaden los fondos a cada nivel del  plataformero
+- Se asegura que se funciona la carga del minijuego y el principal
+- Se añaden algunos UIButtons
+- Se termina completamente el personaje principal en tanto diseño y mecánicas, falta agregar estrella de back
+
+Version 2.9
+-Se trabaja en el library Game
+-Se añade el tutorial y una mejor guía para ayudar al usuario.
+-Se agrega una función que no permite pasar al personaje a menos de que tenga todos los libros.
+-Se agrega la funcionalidad de pasar del library al quiz, o de devolverse si lo desea.
+
+Version 3.0
+-Se agregan pause State a todos lo minijuegos
+-Se añaden los UI
+-Se hace el trabajo para terminar
+
+Version 3.1
+-Se corrige el error del menu
+-Se añade el fin del juego del library game
+-Se actualiza el changelog
+
+

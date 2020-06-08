@@ -21,7 +21,7 @@ public class Bullet extends Entity {
 
     private int X;
     private int Y;
-    private int BulletSpeed = 8;
+    private int BulletSpeed = 500;
     private Creature creature;
 
     public Bullet(Handler handler, EntityManager manager, float x, float y, int width, int height, Creature creature) {
@@ -44,9 +44,9 @@ public class Bullet extends Entity {
 
     public void move() {
         if (this.creature instanceof Player) {
-            x += BulletSpeed;
+            x += BulletSpeed*handler.getDeltaTime();
         } else {
-            x -= BulletSpeed;
+            x -= BulletSpeed*handler.getDeltaTime();
         }
 
     }

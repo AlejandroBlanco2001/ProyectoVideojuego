@@ -30,7 +30,7 @@ public class LaserAlien extends Creature {
         this.width = 60;
         this.height = 36;
 
-        speed = 1;
+        this.speed = 0.005f;
 
         bounds.x = 0;
         bounds.y = 0;

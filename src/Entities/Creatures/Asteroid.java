@@ -37,7 +37,7 @@ public class Asteroid extends Creature {
         super(handler, manager, x, y, width, height);
 
         this.hud = hud;
-        this.setHealth(25);
+        this.setHealth(15);
 
         this.width = (int) (Math.random() * 70 + 30);
         this.height = this.width;

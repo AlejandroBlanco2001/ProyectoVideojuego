@@ -10,6 +10,7 @@ import MainG.Handler;
 import MainG.Window;
 import Tilemaps.*;
 import UI.ClickListener;
+import UI.UIHelper;
 import UI.UIImageButton;
 import UI.UIManager;
 import UtilLoader.MusicPlayer;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 import tinysound.Music;
 import tinysound.Sound;
 
+// fade in https://stackoverflow.com/questions/20346661/java-fade-in-and-out-of-images
 public class MenuState extends GameState implements SaveGame {
 
     private Music bgMusic;
@@ -47,11 +49,14 @@ public class MenuState extends GameState implements SaveGame {
     private UIManager uimanager;
     public UIImageButton exit, option, newg, continu, tutorial;
 
+    private Color titleColor;
+    private Font titleFont;
+    private Font font;
+
     public MenuState(GameStateManager gsm, Handler handler) {
         super(gsm);
         this.handler = handler;
         sw = false;
-
         uimanager = new UIManager(handler);
         uimanager.addUIObject(new UIImageButton(1047f, 0f, 32, 32, Assets.minimize, new ClickListener() {
             @Override
@@ -66,14 +71,7 @@ public class MenuState extends GameState implements SaveGame {
             }
         }));
 
-        uimanager.addUIObject(option = new UIImageButton(50f, 460f, 256, 57, Assets.UIMenu[6], new ClickListener() {
-            @Override
-            public void onClick() {
-
-            }
-        }));
-
-        uimanager.addUIObject(continu = new UIImageButton(50f, 380f, 256, 57, Assets.UIMenu[7], new ClickListener() {
+        uimanager.addUIObject(continu = new UIImageButton(50f, 460f, 256, 57, Assets.UIMenu[7], new ClickListener() {
             @Override
             public void onClick() {
                 musicPlayer.kill();
@@ -81,23 +79,19 @@ public class MenuState extends GameState implements SaveGame {
             }
         }));
 
-        uimanager.addUIObject(newg = new UIImageButton(50f, 300f, 256, 57, Assets.UIMenu[8], new ClickListener() {
+        uimanager.addUIObject(newg = new UIImageButton(50f, 370f, 256, 57, Assets.UIMenu[8], new ClickListener() {
             @Override
             public void onClick() {
                 musicPlayer.kill();
                 clearFile("saveGeneralFile.txt");
                 clearFile("savefile.txt");
-                gsm.setState(1);
+                gsm.setState(3);
             }
         }));
-        uimanager.addUIObject(tutorial = new UIImageButton(900, 650, 256, 57, Assets.UIMenu[1], new ClickListener() {
-            @Override
-            public void onClick() {
-
-            }
-        }));
+        uimanager.addUIObject(new UIHelper(Assets.UIHelperMenu, 8000, 540, 430, 475, 200));
         anm = new Animation(100, Assets.backgroundMenu);
         init();
+        
     }
 
     @Override
@@ -105,7 +99,9 @@ public class MenuState extends GameState implements SaveGame {
         handleInput();
         anm.update();
         musicControl();
-        uimanager.tick();
+        if (sw) {
+            uimanager.tick();
+        }
     }
 
     public void draw(Graphics2D g) {
@@ -120,7 +116,7 @@ public class MenuState extends GameState implements SaveGame {
                 noMoreCurrently();
                 currentChoice = 0;
             } else {
-                for (int i = 1; i <= 4; i++) {
+                for (int i = 1; i <= 3; i++) {
                     if (i == currentChoice) {
                         switch (currentChoice) {
                             case 1:
@@ -133,10 +129,6 @@ public class MenuState extends GameState implements SaveGame {
                                 noMoreCurrently(continu);
                                 break;
                             case 3:
-                                option.setCurrent(true);
-                                noMoreCurrently(option);
-                                break;
-                            case 4:
                                 exit.setCurrent(true);
                                 noMoreCurrently(exit);
                                 break;
@@ -159,13 +151,11 @@ public class MenuState extends GameState implements SaveGame {
         while (Window.mouse == null) {
             System.out.println("Cargando");
         }
-
         Window.mouse.setUIManager(uimanager);
         bgMusic = AudioLoader.bgMusic;
         musicPlayer = new MusicPlayer(bgMusic);
-        Window.mouse.setUIManager(uimanager);
         hiloMusica = new Thread(musicPlayer, "auxiliarThreadForMusic");
-//        hiloMusica.start();
+        //hiloMusica.start();
         menuUp = AudioLoader.upMenu;
     }
 
@@ -173,7 +163,7 @@ public class MenuState extends GameState implements SaveGame {
         long now = System.currentTimeMillis();
         if (Window.keyManager.space) {
             bgMusic.stop();
-            gsm.setState(3);
+            gsm.setState(5);
         }
         // Opcion de continuar donde se habia dejado la partida
         if (Window.keyManager.enter) {
@@ -190,13 +180,13 @@ public class MenuState extends GameState implements SaveGame {
             currentChoice--;
             menuUp.play();
             if (currentChoice < 1) {
-                currentChoice = 4;
+                currentChoice = 3;
             }
         }
         if (Window.keyManager.down) {
             currentChoice++;
             menuUp.play();
-            if (currentChoice > 4) {
+            if (currentChoice > 3) {
                 currentChoice = 1;
             }
         }
@@ -228,7 +218,7 @@ public class MenuState extends GameState implements SaveGame {
         switch (currentChoice) {
             case 0:
                 musicPlayer.kill();
-                gsm.setState(1);
+                gsm.setState(2);
                 break;
             case 1:
                 musicPlayer.kill();
@@ -284,7 +274,7 @@ public class MenuState extends GameState implements SaveGame {
     }
 
     public boolean noHovering() {
-        if (exit.isHovering() || option.isHovering() || continu.isHovering() || newg.isHovering()) {
+        if (exit.isHovering() || continu.isHovering() || newg.isHovering()) {
             return true;
         } else {
             return false;

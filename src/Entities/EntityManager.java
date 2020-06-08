@@ -3,6 +3,7 @@ package Entities;
 import Entities.Creatures.MainPlayer;
 import Entities.Creatures.Player;
 import Entities.Creatures.Player_Joan;
+import Entities.Static.BookInfo;
 import GameStates.GameState;
 import MainG.Handler;
 import java.awt.Graphics2D;
@@ -18,6 +19,8 @@ public class EntityManager{
     private static MainPlayer mainC;
     private ArrayList<Entity> entities;
     private int Score = 0;
+    private boolean quizState = false;
+    Entity player;
 
     /**
      * Comparador de entidades.
@@ -34,6 +37,7 @@ public class EntityManager{
     
     /**
      * Constructor de la clase Entity Manager.
+     * 
      * @param handler Handler del EntityManager.
      * @param state El State del Entity Manager.
      */
@@ -59,6 +63,7 @@ public class EntityManager{
     
     /**
      * Constructor que solo recibe Handler.
+     * 
      * @param handler Handler del entity manager.
      */
     public EntityManager(Handler handler) {
@@ -68,11 +73,20 @@ public class EntityManager{
     
     /**
      * Metodo que renderiza la entidad.
+     * 
      * @param g graficos
      */
     public void render(Graphics2D g) {
         for (Entity e : entities) {
-            e.render(g);
+            if(!(e instanceof BookInfo)){
+                e.render(g);
+            }
+        }
+        
+        for (Entity entity : entities) {
+            if((entity instanceof BookInfo)){
+                entity.render(g);
+            }
         }
     }
     
@@ -140,5 +154,12 @@ public class EntityManager{
     public MainPlayer getMainPlayer() {
         return mainC;
     }
-
+    
+    public void verifyEnd() {
+        this.quizState = true;
+    }
+    
+    public boolean getQuizState() {
+        return this.quizState;
+    }
 }

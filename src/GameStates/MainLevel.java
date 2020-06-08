@@ -1,10 +1,14 @@
 package GameStates;
 
+import Audio.AudioLoader;
 import Entities.EntityManager;
 import MainG.Handler;
 import MainG.Window;
 import MainLevel.MainLevelUpManager;
 import MainLevel.WorldGenerator.WorldPlat;
+import Tilemaps.Assets;
+import UI.UIHelper;
+import UI.UIManager;
 import java.awt.Graphics2D;
 
 public class MainLevel extends GameState {
@@ -14,6 +18,7 @@ public class MainLevel extends GameState {
     private boolean gameChanged = false;
     private MainLevelUpManager levelManager;
     private String path = "Resources/Worlds/WorldThematic1.txt";
+    private UIManager uimanager;
 
     public MainLevel(GameStateManager gsm, Handler handler, String tag) {
         super(gsm);
@@ -21,21 +26,30 @@ public class MainLevel extends GameState {
         entityManager = new EntityManager(handler);
         this.world = new WorldPlat(handler, entityManager, path, this);
         this.levelManager = new MainLevelUpManager(world, entityManager, this);
+        uimanager= new UIManager(handler);
+        
+        uimanager.addUIObject(new UIHelper(Assets.UIHelperMain,5000,400,30,475,200));
+        
+        Window.mouse.setUIManager(uimanager);
         init();
     }
 
     @Override
     public void init() {
-        //levelManager.setMusic(AudioLoader.musicPlayListMainLevel);
+        levelManager.setMusic(AudioLoader.musicPlayListMainLevel);
+        timePassed = System.currentTimeMillis();
     }
 
     @Override
     public void update() {
         if (!gameChanged) {
             world.update();
+            
+                
             levelManager.levelUpManager();
+            // Iniciar el menu de pausa
             if (Window.keyManager.pause) {
-                gsm.reloadState(4);
+                pauseState();
             }
         }
     }
@@ -44,6 +58,7 @@ public class MainLevel extends GameState {
     public void draw(Graphics2D g) {
         if (!gameChanged) {
             world.render(g);
+            uimanager.render(g);
         }
     }
 

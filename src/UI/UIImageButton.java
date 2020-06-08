@@ -63,4 +63,8 @@ public class UIImageButton extends UIObject {
     public void setCurrent(boolean b) {
         current = b;
     }
+    
+    public void setImage(BufferedImage bf){
+        this.image = bf;
+    }
 }

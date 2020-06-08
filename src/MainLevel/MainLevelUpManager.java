@@ -30,10 +30,10 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
     private MainPlayer player;
     private int currentButtonsPressed;
     private boolean flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flag7 = false, flag8 = false, flag9 = false, flag10 = false;
-
+    
     private MusicPlayer musicPlayer;
     private Thread hiloMusica;
-
+    
     private MainLevel state;
     int[] position = new int[2];
 
@@ -45,13 +45,11 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         init();
     }
 
-    public void init() {
-        if (state.getGsm().getCurrentState() == 1) {
-            musicPlaylist = AudioLoader.musicPlayListMainLevel;
-            musicPlayer = new MusicPlayer(musicPlaylist);
-            hiloMusica = new Thread(musicPlayer, "auxiliarMusica");
-            hiloMusica.start();
-        }
+    
+    public void init(){
+        musicPlaylist = AudioLoader.musicPlayListMainLevel;
+        musicPlayer = new MusicPlayer(musicPlaylist);
+        hiloMusica = new Thread(musicPlayer,"auxiliarMusica");
         flag1 = false;
         flag2 = false;
         flag3 = false;
@@ -65,13 +63,15 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         levelSwitched = false;
         currentWorld = 1;
         minigames = 0;
+        //hiloMusica.start();
     }
-
+    
     @Override
     public void levelUpManager() {
-        if (Window.keyManager.debug) {
+        if(Window.keyManager.debug){
             player.setGravity(500f);
         }
+        
         changeMusic();
         WorldPlat worldAux = (WorldPlat) world.cast(this);
         if (!endMinigame) {
@@ -195,14 +195,14 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
 
     @Override
     public void changeMusic() {
-        if (!levelSwitched) {
+        if(!levelSwitched){
             musicPlayer.resume();
         }
     }
 
     @Override
     public void finishLevel() {
-
+        
     }
 
     @Override
@@ -274,7 +274,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
             }
         }
         if (!levelSwitched) {
-            if (player.isTouchingLap()) {
+            if (player.isTouchingLap()){
                 if (currentWorld == 10) {
                     endMinigame = true;
                 } else {
@@ -345,13 +345,14 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         System.out.println(endMinigame);
         return endMinigame;
     }
-
-    public void setLevelSwitched(boolean value) {
-        levelSwitched = value;
+    
+    public void setLevelSwitched(boolean value){
+       levelSwitched = value; 
     }
 
     public MusicPlayer getMusicPlayer() {
         return musicPlayer;
     }
-
+    
+    
 }

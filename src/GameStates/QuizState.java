@@ -5,7 +5,9 @@
  */
 package GameStates;
 
+import FirstMinigame.WorldGenerator.WorldLibrary;
 import MainG.Window;
+import Tilemaps.Animation;
 import Tilemaps.Assets;
 import UI.Answer;
 import UI.ClickListener;
@@ -13,99 +15,107 @@ import UI.UIManager;
 import UI.UIObject;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 /**
  *
  * @author German David
  */
-public class QuizState extends GameState{
+public class QuizState extends GameState {
+
     UIManager manager;
-    Answer a,b,c,d;
+    Answer a, b, c, d;
     Answer ans;
     boolean answered;
-    int i;
-    long wait=5000,lastTime=0,actual=0;
-    
+    boolean sw;
+    int i, correctas;
+    long wait = 5000, lastTime = 0, actual = 0;
+    private Animation openning;
+
     public QuizState(GameStateManager gsm) {
         super(gsm);
-        i=1;
-        answered= false;
-        manager= new UIManager(handler);
+        i = 1;
+        correctas = 0;
+        answered = false;
+        manager = new UIManager(handler);
+        sw = true;
         Window.mouse.setUIManager(manager);
-         a= new Answer(true,"Correcta",500,300,100,100,new ClickListener() {
-                @Override
-                public void onClick() {
-                    if(a.isCorrect()){
-                        System.out.println("True");
-                    }else{
-                        System.out.println("False");
-                    }
-                    answered=true;
-                    ans=a;
+        a = new Answer(true, "Correcta", 550, 240, 280, 50, new ClickListener() {
+            @Override
+            public void onClick() {
+                if (a.isCorrect()) {
+                    System.out.println("True");
+                } else {
+                    System.out.println("False");
                 }
-            });
-                    manager.addUIObject(a);
-                    
-                    b= new Answer(false,"Falsa",500,410,100,100,new ClickListener() {
-                @Override
-                public void onClick() {
-                    if(b.isCorrect()){
-                        System.out.println("True");
-                    }else{
-                        System.out.println("False");
-                    }
-                   answered=true;
-                   ans=b;
+                answered = true;
+                ans = a;
+            }
+        });
+        manager.addUIObject(a);
+
+        b = new Answer(false, "Falsa", 550, 340, 280, 50, new ClickListener() {
+            @Override
+            public void onClick() {
+                if (b.isCorrect()) {
+                    System.out.println("True");
+                } else {
+                    System.out.println("False");
                 }
-            });
-                    manager.addUIObject(b);
-                    c= new Answer(false,"Falsa",500,510,100,100,new ClickListener() {
-                @Override
-                public void onClick() {
-                    if(c.isCorrect()){
-                        System.out.println("True");
-                    }else{
-                        System.out.println("False");
-                    }
-                        ans=c;
-                        answered=true;
+                answered = true;
+                ans = b;
+            }
+        });
+        manager.addUIObject(b);
+        c = new Answer(false, "Falsa", 550, 440, 280, 50, new ClickListener() {
+            @Override
+            public void onClick() {
+                if (c.isCorrect()) {
+                    System.out.println("True");
+                } else {
+                    System.out.println("False");
                 }
-            });
-                    manager.addUIObject(c);
-                    d= new Answer(false,"Falsa",500,610,100,100,new ClickListener() {
-                @Override
-                public void onClick() {
-                    if(d.isCorrect()){
-                        System.out.println("True");
-                    }else{
-                        System.out.println("False");
-                    }
-                    ans=d;
-                   answered=true;
+                ans = c;
+                answered = true;
+            }
+        });
+        manager.addUIObject(c);
+        d = new Answer(false, "Falsa", 550, 540, 280, 50, new ClickListener() {
+            @Override
+            public void onClick() {
+                if (d.isCorrect()) {
+                    System.out.println("True");
+                } else {
+                    System.out.println("False");
                 }
-            });
-                    manager.addUIObject(d);
-               
-                    
+                ans = d;
+                answered = true;
+            }
+        });
+        manager.addUIObject(d);
+
+        openning = new Animation(50, Assets.QuizBook);
+        openning.setIndex(1);
     }
-    
-    
-    
-    
+
     @Override
     public void init() {
+        timePassed = System.currentTimeMillis();
     }
 
     @Override
     public void update() {
-            if(!answered){
-                actual=System.currentTimeMillis();
-                lastTime=0;
-            switch(i){
-                
+        openning.update();
+        if (!answered) {
+            Window.mouse.setUIManager(manager);
+            actual = System.currentTimeMillis();
+            lastTime = 0;
+            manager.tick();
+            switch (i) {
+
                 case 1:
-                    
-                   break;
+
+                    break;
                 case 2:
                     a.setNewInformation("Level 2");
                     a.setNewCorrect(false);
@@ -137,73 +147,70 @@ public class QuizState extends GameState{
                     break;
             }
             getInput();
-            }else{
-                lastTime+=System.currentTimeMillis()-actual;
-                actual=System.currentTimeMillis();
-                
-                if(lastTime>=wait){
-                    i++;
-                    answered=false;
-                }
-                
+        } else {
+            lastTime += System.currentTimeMillis() - actual;
+            actual = System.currentTimeMillis();
+            Window.mouse.setUIManager(null);
+
+            if (lastTime >= wait) {
+                i++;
+                openning.setIndex(1);
+                answered = false;
             }
-            
-            manager.tick();
+
         }
-    
-    public void getInput(){
-        if(Window.keyManager.a){
+        // Iniciar el menu de pausa
+        if (Window.keyManager.pause) {
+            pauseState();
+        }
+    }
+
+    public void getInput() {
+        if (Window.keyManager.a) {
             a.onClick();
-        }else if(Window.keyManager.b){
+        } else if (Window.keyManager.b) {
             b.onClick();
-        }else if( Window.keyManager.c){
+        } else if (Window.keyManager.c) {
             c.onClick();
-        }else if(Window.keyManager.d){
+        } else if (Window.keyManager.d) {
             d.onClick();
         }
     }
-    
+
     @Override
     public void draw(Graphics2D g) {
-        g.setColor(Color.gray);
-        g.fillRect(0, 0, 1080, 720);
-        
-     if(!answered){  
-         
-        manager.render(g);
-        //Diferentes preguntas
-        switch(i){
-            case 1:
-                g.drawImage(Assets.enemy, 400,20 , null);
-                break;
-            case 2:
-                g.drawImage(Assets.floor, 400,20 , null);
-                break;
-            case 3:
-                g.drawImage(Assets.CursorSpace, 400,20 , null);
-                break;
-            case 4:
-                g.drawImage(Assets.LaserAlien, 400,20 , null);
-                break;
-            case 5:
-                g.drawImage(Assets.astronautTalker, 400,20 , null);
-                break;
-            default:
-                
-                break;
-        }
-           
-    }else{
-            g.setColor(Color.WHITE);
-            g.fillRect(100, 100, 100, 100);
-            g.setColor(Color.BLACK);
-            g.drawString(""+ans.isCorrect(), 100, 100);
+        g.drawImage(Assets.Table, 0, 0, null);
+        if (i <= 6) {
+
+            if (!answered) {
+                //Diferentes preguntas
+                if (getCurrentFrame().equals(Assets.QuizBook[0])) {
+                    g.drawImage(Assets.Questions[i - 1], 130, 70, null);
+                    manager.render(g);
+                } else {
+                    g.drawImage(getCurrentFrame(), 130, 70, 800, 580, null);
+                }
+
+            } else {
+                g.drawImage(Assets.QuizAnswers[i - 1], 130, 70, null);
+                g.setColor(Color.BLACK);
+                if (ans.isCorrect()) {
+                    g.drawString("Felicitaciones! Tu respuesta es correcta", 550, 240);
+                    correctas++;
+                } else {
+                    g.drawString("Lo sentimos. Tu respuesta es incorrecta", 550, 240);
+                }
+
+                sw = true;
+            }
+        } else {
+            g.drawString("Obtuviste" + correctas, i, i);
+            
         }
     }
 
     @Override
     public void musicControl() {
-        
     }
 
     @Override
@@ -213,14 +220,22 @@ public class QuizState extends GameState{
 
     @Override
     public void getInsertData() {
-        
     }
 
     @Override
     public void getLoadData() {
-        
+
     }
 
+    private Image getCurrentFrame() {
+        if (sw == false) {
+            return Assets.QuizBook[0];
+        } else {
+            if (openning.getCurrentFrame().equals(Assets.QuizBook[17])) {
+                sw = !sw;
+            }
+            return openning.getCurrentFrame();
+        }
+    }
 
-    
 }

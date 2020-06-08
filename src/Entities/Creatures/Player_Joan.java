@@ -56,7 +56,7 @@ public class Player_Joan extends Character {
         animUp = new Animation(300, Assets.playerUp);
         animR = new Animation(300, Assets.playerRight);
         animL = new Animation(300, Assets.playerLeft);
-        this.speed += 3;
+        this.speed-=2;
     }
 
     @Override
@@ -186,17 +186,7 @@ public class Player_Joan extends Character {
 
     @Override
     public void render(Graphics2D g) {
-
         g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamara().getxOffset()), (int) (y - handler.getGameCamara().getyOffset()), width, height, null);
-        if (punchie) {
-            g.setColor(Color.blue);
-            g.fillRect((int) (ar1 - handler.getGameCamara().getxOffset()), (int) (ar2 - handler.getGameCamara().getyOffset()), attackR, attackR);
-            punchie = false;
-        }
-        g.drawString(this.x + " , " + this.y, (int) (x - handler.getGameCamara().getxOffset()), (int) (y - handler.getGameCamara().getyOffset()));
-        g.setColor(Color.yellow);
-        g.fillRect((int) (x + bounds.x - handler.getGameCamara().getxOffset()),
-                (int) (y + bounds.y - handler.getGameCamara().getyOffset()), bounds.width, bounds.height);
     }
 
     /**
@@ -210,7 +200,8 @@ public class Player_Joan extends Character {
      */
     @Override
     protected boolean collisionWithTile(int x, int y) {
-        return handler.getWorld().getTile(x, y).isSolid();
+        return false;
+//return handler.getWorld().getTile(x, y).isSolid();
     }
 
     public Rectangle getBounds() {
@@ -251,11 +242,10 @@ public class Player_Joan extends Character {
     }
 
     public boolean checkEnd() {
-        if (this.x > 5700 && this.y > 1600 && this.y < 1800) {
-            System.out.println("habla cachon");
-            return false;
+        if (this.x > 5700 && this.y > 1500 && this.y < 1800) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void setGameFinished(boolean gameFinished) {

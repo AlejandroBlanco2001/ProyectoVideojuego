@@ -14,13 +14,13 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class Level1UpManager extends LevelUpManager{
-    
+public class Level1UpManager extends LevelUpManager {
+
     Graphics2D g;
     private WorldLibrary worldLib;
-    
     private Level1State state;
-    
+    private boolean doingQuiz = false;
+
     @Override
     public void levelUpManager() {
     }
@@ -34,14 +34,23 @@ public class Level1UpManager extends LevelUpManager{
     public void finishLevel() {
 
     }
-    
-    public Level1UpManager(Level1State state, World world, DialogueLoader dialogueLoader) {
-        super(world);
-        this.state = state;
+
+    public Level1UpManager(Level1State state, World world, EntityManager entityManager) {
+        super(world, entityManager);
+        this.state = (Level1State) state;
         this.worldLib = (WorldLibrary) world;
-        this.dialogueLoader = dialogueLoader;
     }
-    
+
+    public void update() {
+        if (this.entityManager == null) {
+            System.out.println("DEJA DE PONERTE EN NULO MALDITA SEA");
+        } else {
+            if (this.entityManager.getQuizState()) {
+                this.state.setGameFinished();
+            }
+        }
+    }
+
     public void insertData() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("savefile.txt"));
@@ -58,7 +67,6 @@ public class Level1UpManager extends LevelUpManager{
         } catch (Exception e) {
         }
     }
-    
 
     // Metodo encargado de recupear los datos del TXT, y pasarlo a los parametros indicados
     /*
@@ -84,6 +92,4 @@ public class Level1UpManager extends LevelUpManager{
 
         }
     }
-
-    
 }

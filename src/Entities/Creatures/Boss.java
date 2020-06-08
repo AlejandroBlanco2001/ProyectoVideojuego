@@ -46,7 +46,7 @@ public class Boss extends Enemy {
     }
 
     @Override
-    public void die(){
+    public void die() {
     }
 
     @Override
@@ -67,7 +67,6 @@ public class Boss extends Enemy {
 
     }
 
-    @Override
     public void render(Graphics2D g) {
         g.setColor(Color.red);
         if (tackling == false) {
@@ -115,13 +114,9 @@ public class Boss extends Enemy {
         {
             return;
         }
-
         shoot();
-
         Rectangle cb = getCollisionBounds();
-
         attackTimer = 0;
-
         for (Entity e : manager.getEntities()) {
             if (!e.equals(this)) {
                 if (e.getCollisionBounds().intersects(cb) && !(e instanceof AutoMissil)) {

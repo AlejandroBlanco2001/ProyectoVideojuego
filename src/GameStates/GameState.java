@@ -12,7 +12,8 @@ public abstract class GameState {
     protected Handler handler;
     protected World world;
     protected String levelTag;
-    
+    protected long timePassed;
+    protected long timeDeltaTime;
     /**
      * Constructor del GameState.
      *
@@ -32,6 +33,16 @@ public abstract class GameState {
 
     public abstract World getWorld();
 
+    // Se verifica si el usuario presiono la letra P, para iniciar un menu de Pausa.
+    protected void pauseState() {
+        timeDeltaTime = System.currentTimeMillis() - timePassed;
+        if (timeDeltaTime > 2000) { // Deley Tecla
+            timePassed = System.currentTimeMillis();
+            gsm.reloadState(4); // Se recarga el state, porque ya esta creado
+            gsm.getGameStates()[4].init(); // Se inicia su contador para el delay de la tecla P
+        }
+    }
+    
     public String getTag() {
         return levelTag;
     }

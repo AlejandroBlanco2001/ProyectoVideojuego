@@ -23,6 +23,7 @@ public class BookPile extends StaticEntity{
     long lastAttackTimer = 0;
     long attackTimer = 0;
     private int id;
+    private boolean found = false;
     
     public BookPile(Handler handler, EntityManager entityM, float x, float y,BookInfo bookinfo) {
         super(handler, entityM, x, y, 55,55);
@@ -55,9 +56,14 @@ public class BookPile extends StaticEntity{
     }
     
     public void foundBook(){
-        WorldLibrary.bookcount += 1;
+        if (!found) {
+            WorldLibrary.bookcount += 1;
+            found = true;
+        }
         entityM.addEntity(bookinfo);
-        this.move(6150 + this.id*85 , 1230);
+        if (this.bookinfo.getId()!=6) {
+            this.move(6150 + this.id*85 , 1330);
+        }
     }
     
     public int getId() {

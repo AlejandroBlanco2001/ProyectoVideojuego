@@ -50,7 +50,7 @@ public class AerialEnemy extends Enemy {
         this.height = 99;
         //Vida y velocidad
         this.setHealth(15);
-        this.speed = 250;
+        this.speed = 150;
         //Hitbox
         bounds.x = 0;
         bounds.y = 0;
@@ -102,7 +102,6 @@ public class AerialEnemy extends Enemy {
      * Metodo para reenderizar al enemigo.  
      * @param g Los graficos para reenderizarlo.
      */
-
     @Override
     public void render(Graphics2D g) {
         g.drawImage(getCurrentAnimationFrame(), (int) x, 0, null);

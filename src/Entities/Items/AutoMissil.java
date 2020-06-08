@@ -36,11 +36,6 @@ public class AutoMissil extends Entity {
     public AutoMissil(Handler handler, EntityManager manager, float x, float y) {
         super(handler, manager, x, y, 30, 15);
 
-        bulletSpeed = 1; //Velocidad de las balas
-
-        xo = (int) this.getX();
-        yo = (int) this.getY();
-        yp = (int) manager.getPlayer().getY();
         xp = (int) manager.getPlayer().getX();
         if ((xo - xp) != 0) {
             m = (int) ((yo - yp) / (xo - xp));
@@ -86,8 +81,11 @@ public class AutoMissil extends Entity {
      * Metodo para que la bala se mueva.
      */
     private void move() {
+        System.out.println(Xmove);
         movex();
         movey();
+        System.out.println("ESTA CULE VAINA SE VA A MOVER"+Xmove);
+        System.out.println("ESTA CULE VAINA SE VA A MOVER"+Ymove);
         x += Xmove;
         y += Ymove;
 
@@ -130,7 +128,6 @@ public class AutoMissil extends Entity {
                 if (e.getCollisionBounds().intersects(cb)) {
                     e.hurt(1);
                     this.setActive(false);
-                    System.out.println("Me golpeé con " + e);
                 }
             }
         }

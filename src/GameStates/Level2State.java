@@ -34,7 +34,7 @@ public class Level2State extends GameState {
         super(gsm);
         this.handler = handler;
         this.levelTag = tag;
-        background= new Animation(50,Assets.spaceBackgroundPlat);
+        background = new Animation(50, Assets.spaceBackgroundPlat);
         entityManager = new EntityManager(handler, this);
         dialogueLoader = new DialogueLoader(handler);
         world = new WorldSpace(entityManager, handler);
@@ -58,9 +58,11 @@ public class Level2State extends GameState {
         }
         background.update();
         musicControl();
+        //bg.update();
         hud.update();
         world.update();
         levelManager.update(hud.getPoint(), hud.getHealth());
+
     }
 
     @Override
@@ -70,8 +72,7 @@ public class Level2State extends GameState {
             levelManager.setGraphics(g);
             ya = !ya;
         }
-        //bg.draw(g);
-        g.drawImage(getCurrentFrame(), 0, 0,1080,720,null);
+        g.drawImage(getCurrentFrame(), 0, 0, 1080, 720, null);
         levelManager.render();
         hud.render(g);
     }
@@ -79,7 +80,7 @@ public class Level2State extends GameState {
     @Override
     public void musicControl() {
     }
-    
+
     @Override
     public World getWorld() {
         return world;
@@ -92,16 +93,6 @@ public class Level2State extends GameState {
         MainLevel auxS = (MainLevel) gsm.getGameStates()[1];
         auxS.getLevelManager().setFinishedMinigame();
         gsm.reloadState(1);
-    }
-
-    // Se verifica si el usuario presiono la letra P, para iniciar un menu de Pausa.
-    private void pauseState() {
-        timeDeltaTime = System.currentTimeMillis() - timePassed;
-        if (timeDeltaTime > 2000) { // Deley Tecla
-            timePassed = System.currentTimeMillis();
-            gsm.reloadState(4); // Se recarga el state, porque ya esta creado
-            gsm.getGameStates()[4].init(); // Se inicia su contador para el delay de la tecla P
-        }
     }
 
     // Indica al levelManager, en este caso, el encargado de Loader y Rellenar el TXT, de rellenar sus datos.
@@ -123,6 +114,4 @@ public class Level2State extends GameState {
     public GameStateManager getGsm() {
         return gsm;
     }
-    
-    
 }

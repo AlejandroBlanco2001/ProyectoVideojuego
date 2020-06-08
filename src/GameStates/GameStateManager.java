@@ -12,7 +12,7 @@ public class GameStateManager {
 
     public static final int NUMGAMESTATE = 6;
     private static GameState[] gameStates;
-    private int currentState;
+    public static int currentState;
     private static GameCamara gameCamera;
 
     private final int MENUSTATE = 0;
@@ -36,7 +36,7 @@ public class GameStateManager {
     }
 
     public void setState(int state) {
-        unloadState(currentState);
+        //unloadState(currentState);
         currentState = state;
         loadState(currentState);
     }
@@ -45,11 +45,15 @@ public class GameStateManager {
     public void reloadState(int state) {
         previousState = currentState;
         currentState = state;
+        gameStates[currentState].init();
+        
     }
 
+    /*
     public void unloadState(int state) {
         gameStates[state] = null;
     }
+    */
 
     // Funcion encargada de cargar los State, controlador de niveles
     private void loadState(int state) {
@@ -74,20 +78,16 @@ public class GameStateManager {
     }
 
     public void update(double deltaTime) {
-        if (gameStates[currentState] != null) {
-            gameStates[currentState].update();
-        } else {
-            System.out.println("CARGANDO");
-        }
+            while(gameStates[currentState] == null){
+                System.out.println("Cargando");
+            }
+        
+        gameStates[currentState].update();
         this.deltaTime = deltaTime;
     }
 
     public void draw(Graphics2D g) {
-        if (gameStates[currentState] != null) {
-            gameStates[currentState].draw(g);
-        } else {
-            System.out.println("CARGANDO");
-        }
+        gameStates[currentState].draw(g);
     }
 
     public int inGameState() {
@@ -95,7 +95,7 @@ public class GameStateManager {
     }
 
     public void preLoadState() {
-        gameStates[MAINLEVELSTATE] = new MainLevel(this, this.handler, "Level 1");
+        gameStates[MAINLEVELSTATE] = new MainLevel(this,handler, "Main Level")
         gameStates[LEVEL1STATE] = new Level1State(this, handler, "Level 2");
         gameStates[LEVEL2STATE] = new Level2State(this, handler, "Level 3");
     }
@@ -123,11 +123,41 @@ public class GameStateManager {
                 Level1State state = (Level1State) gameStates[currentState];
                 return state.getWorld();
             }
-            default: {
+            case 3: {
                 Level2State state = (Level2State) gameStates[currentState];
                 return state.getWorld();
             }
         }
+        return null;
+    }
+
+    // Se encarga de verificar, si en el TXT de guardado, en la primera linea esta vacia, lo que indica que el juego es la primera vez que se inicia
+    boolean VerificarReinicioJuego(int state) {
+        if (gameStates[state] == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    boolean isOnMinigame(int subState) {
+        if(subState == 1 || subState == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public int getMinigame(int subState) {
+        if(subState == 1){
+            return LEVEL1STATE;
+        }else{
+            return LEVEL2STATE;
+        }
+    }
+
+    public int getCurrentState() {
+        return currentState;
     }
 
     // Se encarga de verificar, si en el TXT de guardado, en la primera linea esta vacia, lo que indica que el juego es la primera vez que se inicia

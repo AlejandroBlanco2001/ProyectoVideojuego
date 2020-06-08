@@ -3,6 +3,7 @@ package Entities.Creatures;
 import Entities.Entity;
 import Entities.EntityManager;
 import MainG.Handler;
+import java.awt.Graphics;
 
 public abstract class Creature extends Entity{
     

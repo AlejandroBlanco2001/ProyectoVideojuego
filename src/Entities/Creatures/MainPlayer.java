@@ -99,6 +99,7 @@ public class MainPlayer extends Character {
         if (Window.keyManager.right) {
             xMove = speedX;
         }
+
         if (Window.keyManager.left) {
             xMove = -speedX;
         }
@@ -213,10 +214,12 @@ public class MainPlayer extends Character {
     }
 
     /**
-     * Devuelve un valor booleano sobre el estado de colision del jugador con una Tile.
-     * 
-     * @return Dependiendo si hay o no una colision con una {@code Tile} devuelve un valor {@code boolean} 
-     * 
+     * Devuelve un valor booleano sobre el estado de colision del jugador con
+     * una Tile.
+     *
+     * @return Dependiendo si hay o no una colision con una {@code Tile}
+     * devuelve un valor {@code boolean}
+     *
      * @author CodeNMore
      * @param x Posicion horizontal relativa donde se encuentra la Tile
      * @param y Posicion vertical relativa donde se encuentra la Tile
@@ -595,5 +598,4 @@ public class MainPlayer extends Character {
     public void setShowStamp(boolean showStamp) {
         this.showStamp = showStamp;
     }
-    
 }
