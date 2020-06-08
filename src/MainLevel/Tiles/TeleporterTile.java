@@ -10,8 +10,10 @@ import java.awt.Graphics;
  */
 public class TeleporterTile extends TileMainLevel {
     
+    
     public TeleporterTile(int id) {
         super(Assets.enigmaMachineTeleporter, id);
+        this.isInteractive = true;
     }
 
     
@@ -22,11 +24,19 @@ public class TeleporterTile extends TileMainLevel {
     
     @Override
     public boolean isInteractive() {
-        return !isInteractive;
+        return isInteractive;
     }
 
     @Override
     public void changeTiles() {
         this.texture = Assets.spaceTeleporter;
+    }
+
+    public void changeSelection() {
+        this.isInteractive = false;
+    }
+    
+    public void returnSelection(){
+        this.isInteractive = true;
     }
 }

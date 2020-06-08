@@ -58,11 +58,9 @@ public class Level2State extends GameState {
         }
         background.update();
         musicControl();
-        //bg.update();
         hud.update();
         world.update();
         levelManager.update(hud.getPoint(), hud.getHealth());
-
     }
 
     @Override
