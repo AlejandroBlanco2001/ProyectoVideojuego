@@ -30,10 +30,10 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
     private MainPlayer player;
     private int currentButtonsPressed;
     private boolean flag1 = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false, flag6 = false, flag7 = false, flag8 = false, flag9 = false, flag10 = false;
-    
+
     private MusicPlayer musicPlayer;
     private Thread hiloMusica;
-    
+
     private MainLevel state;
     int[] position = new int[2];
 
@@ -45,17 +45,16 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
         init();
     }
 
-    
-    public void init(){
+    public void init() {
         musicPlaylist = AudioLoader.musicPlayListMainLevel;
         musicPlayer = new MusicPlayer(musicPlaylist);
-        hiloMusica = new Thread(musicPlayer,"auxiliarMusica");
+        hiloMusica = new Thread(musicPlayer, "auxiliarMusica");
         //hiloMusica.start();
     }
-    
+
     @Override
     public void levelUpManager() {
-        if(Window.keyManager.debug){
+        if (Window.keyManager.debug) {
             player.setGravity(500f);
         }
         changeMusic();
@@ -86,7 +85,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
                     if (!flag3) {
                         player.setMaxReturns(1);
                         player.setAmountOfReturns(0);
-                        flag2 = true;
+                        flag3 = true;
                         insertData();
                     }
                     switchLevels(4, worldAux);
@@ -177,14 +176,14 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
 
     @Override
     public void changeMusic() {
-        if(!levelSwitched){
+        if (!levelSwitched) {
             musicPlayer.resume();
         }
     }
 
     @Override
     public void finishLevel() {
-        
+
     }
 
     @Override
@@ -255,8 +254,8 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
             }
         }
         if (!levelSwitched) {
-            if (player.isTouchingLap()){
-                if (currentWorld == 10) {
+            if (player.isTouchingLap()) {
+                if (currentWorld == 1) {
                     endMinigame = true;
                 } else {
                     currentWorld++;
@@ -265,6 +264,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
                     position = world.getPositionMap();
                     player.setPosition(position);
                     player.setReturnPoint(null);
+                    player.setAmountOfReturns(0);
                     currentButtonsPressed = 0;
                 }
             }
@@ -279,6 +279,9 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
             position = world.getPositionMap();
             player.setPosition(position);
             player.setReset(false);
+            player.setReturnPoint(null);
+            player.setAmountOfReturns(0);
+
         }
     }
 
@@ -319,14 +322,13 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
     public boolean getFinishedGame() {
         return endMinigame;
     }
-    
-    public void setLevelSwitched(boolean value){
-       levelSwitched = value; 
+
+    public void setLevelSwitched(boolean value) {
+        levelSwitched = value;
     }
 
     public MusicPlayer getMusicPlayer() {
         return musicPlayer;
     }
-    
-    
+
 }

@@ -18,6 +18,7 @@ import tinysound.TinySound;
  *
  * @version 1.0
  */
+
 // Ideas de los gameLoops corregidos https://gameprogrammingpatterns.com/game-loop.html#interview-with-a-cpu
 public class GamePanel extends JPanel implements Runnable {
 

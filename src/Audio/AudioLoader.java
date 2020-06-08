@@ -10,7 +10,7 @@ import tinysound.TinySound;
 public class AudioLoader implements Runnable{
 
     public static Music damageEnemyShip, bgMusic, bgTalkMomentSpaceInvaders, bgMusicSpaceInvaders;
-    public static Sound shot, upMenu, damageAsteroid;
+    public static Sound shot, upMenu, damageAsteroid,openGate,closedGate,backInTime,jumpSound;
     public static Music[] musicPlayListMainLevel = new Music[5];
     /**
      * Metodo que se hace al inicializar la clase.
@@ -23,6 +23,10 @@ public class AudioLoader implements Runnable{
         bgMusicSpaceInvaders = TinySound.loadMusic("/Music/spaceInvadersRace.wav");
         damageAsteroid = TinySound.loadSound("/SFX/explosionAsteroid.wav");
         damageEnemyShip = TinySound.loadMusic("/SFX/explosionEnemy.wav");
+        openGate = TinySound.loadSound("/SFX/gateOpenSound.wav");
+        closedGate = TinySound.loadSound("/SFX/gateClosed.wav");
+        backInTime = TinySound.loadSound("SFX/backInTime.wav");
+        jumpSound = TinySound.loadSound("SFX/jumpSound.wav");
         fillPlayList();
     }
 

@@ -1,12 +1,10 @@
 package GameStates;
 
-import Audio.AudioLoader;
 import Entities.EntityManager;
 import MainG.Handler;
 import MainG.Window;
 import MainLevel.MainLevelUpManager;
 import MainLevel.WorldGenerator.WorldPlat;
-import Tilemaps.Assets;
 import java.awt.Graphics2D;
 
 public class MainLevel extends GameState {
@@ -28,7 +26,7 @@ public class MainLevel extends GameState {
 
     @Override
     public void init() {
-        levelManager.setMusic(AudioLoader.musicPlayListMainLevel);
+        //levelManager.setMusic(AudioLoader.musicPlayListMainLevel);
     }
 
     @Override

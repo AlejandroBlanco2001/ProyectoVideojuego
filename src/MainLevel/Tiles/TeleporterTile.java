@@ -9,13 +9,17 @@ import java.awt.Graphics;
  * @author Omen
  */
 public class TeleporterTile extends TileMainLevel {
-
-    private boolean newTile = false;
     
     public TeleporterTile(int id) {
         super(Assets.enigmaMachineTeleporter, id);
     }
 
+    
+    @Override
+    public void render(Graphics g, int x, int y){
+        g.drawImage(texture,x-20,y-70, 100,100,null);
+    }
+    
     @Override
     public boolean isInteractive() {
         return !isInteractive;
@@ -23,7 +27,6 @@ public class TeleporterTile extends TileMainLevel {
 
     @Override
     public void changeTiles() {
-        newTile = true;
         this.texture = Assets.spaceTeleporter;
     }
 }

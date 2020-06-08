@@ -1,5 +1,8 @@
 package Entities.Creatures;
 
+import Audio.AudioLoader;
+import static Audio.AudioLoader.backInTime;
+import static Audio.AudioLoader.jumpSound;
 import Entities.EntityManager;
 import MainG.Handler;
 import MainG.Window;
@@ -11,6 +14,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import tinysound.Sound;
 
 public class MainPlayer extends Character {
 
@@ -25,13 +29,16 @@ public class MainPlayer extends Character {
     private boolean buttonPressed = false;
     private boolean falling = false;
     private boolean inMinigame = false;
+    private boolean showStamp = false;
 
     private Punto returnPoint;
     private int amountOfReturns;
     private int maxReturns;
     private double timePressed;
 
-    private Animation animDL, animDR, animUpR, animUpL, animR, animL, animSSL, animSSR, animRi;
+    private Sound backTime, jumpSound;
+
+    private Animation animDL, animDR, animUpR, animUpL, animR, animL, animSSL, animSSR, animTimeStamp;
 
     public void setPosition(int[] position) {
         this.x = position[0];
@@ -78,7 +85,15 @@ public class MainPlayer extends Character {
         animSSL = new Animation(100, Assets.mainPlayerStandStillL);
         animSSR = new Animation(100, Assets.mainPlayerStandStillR);
 
+        animTimeStamp = new Animation(100, Assets.timeStamp);
+
         timePressed = System.currentTimeMillis();
+        init();
+    }
+
+    public void init() {
+        backTime = AudioLoader.backInTime;
+        jumpSound = AudioLoader.jumpSound;
     }
 
     @Override
@@ -86,7 +101,6 @@ public class MainPlayer extends Character {
         if (Window.keyManager.right) {
             xMove = speedX;
         }
-
         if (Window.keyManager.left) {
             xMove = -speedX;
         }
@@ -97,6 +111,7 @@ public class MainPlayer extends Character {
                 yMove = speedY;
                 jumping = true;
                 antiSpameJump = 1;
+                jumpSound.play(0.5f);
             }
         } else {
             antiSpameJump = 0;
@@ -122,14 +137,15 @@ public class MainPlayer extends Character {
             if (returnPoint == null && amountOfReturns < maxReturns) {
                 returnPoint = new Punto(x, y);
                 timePressed = System.currentTimeMillis();
+                showStamp = true;
             } else {
-                if (amountOfReturns == maxReturns) {
-                } else {
+                if (amountOfReturns != maxReturns) {
                     backwards(returnPoint);
                     amountOfReturns++;
                     returnPoint = null;
+                    showStamp = false;
+                    backTime.play(0.5f);
                 }
-
             }
         }
 
@@ -154,6 +170,7 @@ public class MainPlayer extends Character {
     public void die() {
         reset = true;
         active = true;
+        setReturnPoint(null);
     }
 
     @Override
@@ -186,6 +203,7 @@ public class MainPlayer extends Character {
         animSSR.update();
         animDR.update();
         animR.update();
+        animTimeStamp.update();
     }
 
     @Override
@@ -193,8 +211,20 @@ public class MainPlayer extends Character {
         g.setColor(Color.red);
         g.fillRect((int) (bounds.x + x), (int) (bounds.y + y), bounds.width, bounds.height);
         g.drawImage(getCurrentAnimationFrame(), (int) x, (int) y, null);
+        if (showStamp) {
+            g.drawImage(animTimeStamp.getCurrentFrame(), (int) returnPoint.x, (int) returnPoint.y, null);
+        }
     }
 
+    /**
+     * Devuelve un valor booleano sobre el estado de colision del jugador con una Tile.
+     * 
+     * @return Dependiendo si hay o no una colision con una {@code Tile} devuelve un valor {@code boolean} 
+     * 
+     * @author CodeNMore
+     * @param x Posicion horizontal relativa donde se encuentra la Tile
+     * @param y Posicion vertical relativa donde se encuentra la Tile
+     */
     @Override
     protected boolean collisionWithTile(int x, int y) {
         try {
@@ -205,12 +235,25 @@ public class MainPlayer extends Character {
         }
     }
 
+    /**
+     * Devuelve la Tile en la posicion que se le solicite
+     *
+     * @author CodeNMore
+     * @param x Posicion horizontal relativa de la Tile
+     * @param y Posicion vertical relativa de la Tile
+     */
     protected TileMainLevel getSpecificTile(int x, int y) {
         WorldPlat tempWorld = (WorldPlat) handler.getWorld();
         TileMainLevel tempTile = (TileMainLevel) tempWorld.getTile(x, y);
         return tempTile;
     }
 
+    /**
+     * Reubica al jugador en la posicion guarda en un punto
+     *
+     * @author Isaac Blanco
+     * @param punto Punto que contiene las posiciones guardas.
+     */
     public void backwards(Punto punto) {
         x = punto.x;
         y = punto.y;
@@ -222,8 +265,13 @@ public class MainPlayer extends Character {
                 double extraVelocity = xMove * percentajeVelocity * handler.getDeltaTime();
                 x += (xMove * handler.getDeltaTime() + extraVelocity);
             } else {
-                int tx = (int) (x + xMove * handler.getDeltaTime() + bounds.x + bounds.width) / TileMainLevel.TILEWIDTH;
-                x = tx * TileMainLevel.TILEWIDTH - bounds.x - bounds.width - 1;
+                if (falling) {
+                    double extraVelocity = xMove * percentajeVelocity * handler.getDeltaTime();
+                    x += (xMove * handler.getDeltaTime() + extraVelocity);
+                } else {
+                    int tx = (int) (x + xMove * handler.getDeltaTime() + bounds.x + bounds.width) / TileMainLevel.TILEWIDTH;
+                    x = tx * TileMainLevel.TILEWIDTH - bounds.x - bounds.width - 1;
+                }
             }
         }
         if (Window.keyManager.left) {
@@ -231,8 +279,13 @@ public class MainPlayer extends Character {
                 double extraVelocity = xMove * percentajeVelocity * handler.getDeltaTime();
                 x += xMove * handler.getDeltaTime() + extraVelocity;
             } else {
-                int tx = (int) (x + xMove * handler.getDeltaTime() + bounds.x) / TileMainLevel.TILEWIDTH;
-                x = tx * TileMainLevel.TILEWIDTH + TileMainLevel.TILEWIDTH - bounds.x;
+                if (falling) {
+                    double extraVelocity = xMove * percentajeVelocity * handler.getDeltaTime();
+                    x += xMove * handler.getDeltaTime() + extraVelocity;
+                } else {
+                    int tx = (int) (x + xMove * handler.getDeltaTime() + bounds.x) / TileMainLevel.TILEWIDTH;
+                    x = tx * TileMainLevel.TILEWIDTH + TileMainLevel.TILEWIDTH - bounds.x;
+                }
             }
         }
     }
@@ -342,19 +395,20 @@ public class MainPlayer extends Character {
     public void jumping() {
         if (jumping) {
             if (hasUpCollision()) {
-                yMove = speedY;
-                y -= yMove * handler.getDeltaTime();
-                speedY -= gravity * handler.getDeltaTime();
-                if (speedY <= 0 || !hasUpCollision()) {
+                if (speedY <= 0) {
                     jumping = false;
                     isGround = false;
                     falling = true;
                     speedY = 0;
                 }
+                yMove = speedY;
+                y -= yMove * handler.getDeltaTime();
+                speedY -= gravity * handler.getDeltaTime();
             } else {
                 jumping = false;
-                falling = true;
                 isGround = false;
+                falling = true;
+                speedY = 0;
             }
         } else {
             if (jumping && isGround) {
@@ -425,7 +479,6 @@ public class MainPlayer extends Character {
         TileMainLevel auxT = getTileDownTouching();
         if (auxT != null) {
             if (auxT.makeDamage()) {
-                System.out.println("MUERTO ABAJO");
                 active = false;
                 die();
             }
@@ -440,7 +493,6 @@ public class MainPlayer extends Character {
         auxT = getTileRightTouching();
         if (auxT != null) {
             if (auxT.makeDamage()) {
-                System.out.println("MUERTO DERECHA");
                 active = false;
                 die();
             }

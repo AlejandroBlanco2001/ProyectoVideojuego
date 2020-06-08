@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/GameStates/GameStateManager.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>74</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/Resources/Worlds/WorldThematic10.txt</file>
-            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/Entities/Creatures/MainPlayer.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/MainLevel.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/MainLevelUpManager.java</file>
-            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/Resources/Worlds/WorldThematic1.txt</file>
-            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/Level2State.java</file>
-            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/SecondMinigame/Level2UpManager.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/WorldGenerator/WorldPlat.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/MenuState.java</file>
         </group>
     </open-files>
 </project-private>

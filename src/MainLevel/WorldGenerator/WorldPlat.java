@@ -1,5 +1,6 @@
 package MainLevel.WorldGenerator;
 
+import Audio.AudioLoader;
 import Entities.EntityManager;
 import Tilemaps.Tile;
 import FirstMinigame.WorldGenerator.Util;
@@ -12,10 +13,11 @@ import MainLevel.Tiles.ElevatorTile;
 import Tilemaps.Animation;
 import Tilemaps.Assets;
 import java.awt.Graphics2D;
+import tinysound.Sound;
 
 /**
  *
- * @author Omen
+ * @author Isaac Blanco
  */
 public class WorldPlat extends World {
 
@@ -24,13 +26,20 @@ public class WorldPlat extends World {
     private int spawnX, spawnY;
     private EntityManager entityM;
     private String path;
-    private Animation animationParallax = new Animation(100,Assets.cityPlataformerBackground);
+    private Animation animationParallax = new Animation(100, Assets.cityPlataformerBackground);
+
+    private Sound openGate, closeGate;
 
     public WorldPlat(Handler handler, EntityManager entityM, String path, GameState state) {
         super(handler);
         this.entityM = new EntityManager(handler, state);
         loadWorld(path);
         this.path = path;
+        init();
+    }
+
+    public void init() {
+        openGate = AudioLoader.openGate;
     }
 
     @Override
@@ -42,7 +51,7 @@ public class WorldPlat extends World {
     @Override
     public void render(Graphics2D g) {
         g.clearRect(0, 0, 1080, 720);
-        g.drawImage(animationParallax.getCurrentFrame(),0,0,1080,720,null);
+        g.drawImage(animationParallax.getCurrentFrame(), 0, 0, 1080, 720, null);
         generateScenario(g);
         entityM.render(g);
     }
@@ -96,6 +105,7 @@ public class WorldPlat extends World {
                     } else {
                         auxT.buttonRelased();
                     }
+                    openGate.play(0.4f);
                 }
             }
         }
@@ -139,9 +149,9 @@ public class WorldPlat extends World {
             }
         }
     }
-    
-    public void changeAnimation(){
-        animationParallax = new Animation(30,Assets.spaceBackgroundPlat);
+
+    public void changeAnimation() {
+        animationParallax = new Animation(30, Assets.spaceBackgroundPlat);
     }
 
 }

@@ -65,20 +65,27 @@ public class GameStateManager {
                 gameStates[state] = new Level1State(this, this.handler, "Level 2");
                 break;
             case LEVEL2STATE:
-                gameStates[state] = new Level2State(this, handler, "Level 3");
-                
-                case QUIZSTATE:
+                gameStates[state] = new Level2State(this, handler, "Level 3");    
+            case QUIZSTATE:
                 gameStates[state] = new QuizState(this);
         }
     }
 
     public void update(double deltaTime) {
-        gameStates[currentState].update();
+        if(gameStates[currentState] != null){
+            gameStates[currentState].update();
+        }else{
+            System.out.println("CARGANDO");
+        }
         this.deltaTime = deltaTime;
     }
 
     public void draw(Graphics2D g) {
-        gameStates[currentState].draw(g);
+        if(gameStates[currentState] != null){
+            gameStates[currentState].draw(g);
+        }else{
+            System.out.println("CARGANDO");
+        }
     }
 
     public int inGameState() {

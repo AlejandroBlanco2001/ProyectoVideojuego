@@ -19,12 +19,14 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tinysound.Music;
 import tinysound.Sound;
 
-// fade in https://stackoverflow.com/questions/20346661/java-fade-in-and-out-of-images
 public class MenuState extends GameState implements SaveGame {
 
     private Music bgMusic;
@@ -45,9 +47,6 @@ public class MenuState extends GameState implements SaveGame {
     private UIManager uimanager;
     public UIImageButton exit, option, newg, continu, tutorial;
 
-    private Color titleColor;
-    private Font titleFont;
-    private Font font;
 
     public MenuState(GameStateManager gsm, Handler handler) {
         super(gsm);
@@ -86,6 +85,8 @@ public class MenuState extends GameState implements SaveGame {
             @Override
             public void onClick() {
                 musicPlayer.kill();
+                clearFile("saveGeneralFile.txt");
+                clearFile("savefile.txt");
                 gsm.setState(1);
             }
         }));
@@ -164,7 +165,7 @@ public class MenuState extends GameState implements SaveGame {
         musicPlayer = new MusicPlayer(bgMusic);
         Window.mouse.setUIManager(uimanager);
         hiloMusica = new Thread(musicPlayer, "auxiliarThreadForMusic");
-        //hiloMusica.start();
+//        hiloMusica.start();
         menuUp = AudioLoader.upMenu;
     }
 
@@ -324,5 +325,24 @@ public class MenuState extends GameState implements SaveGame {
 
     public Music getMusic() {
         return bgMusic;
+    }
+   
+    // Codigo tomado de https://stackoverflow.com/questions/29878237/java-how-to-clear-a-text-file-without-deleting-it/42282671
+    // Autor: Ankur Anand
+    public void clearFile(String file) {
+        FileWriter fwOb = null;
+        try {
+            fwOb = new FileWriter(file, false);
+        } catch (IOException ex) {
+            Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PrintWriter pwOb = new PrintWriter(fwOb, false);
+        pwOb.flush();
+        pwOb.close();
+        try {
+            fwOb.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
