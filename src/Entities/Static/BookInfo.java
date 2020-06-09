@@ -5,16 +5,12 @@
  */
 package Entities.Static;
 
-import Entities.Entity;
 import Entities.EntityManager;
-import Entities.Static.BookPile;
 import FirstMinigame.WorldGenerator.WorldLibrary;
 import MainG.Handler;
 import MainG.Window;
 import Tilemaps.Animation;
-import java.awt.Color;
 import Tilemaps.Assets;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -40,6 +36,7 @@ public class BookInfo extends StaticEntity {
         this.manager = manager;
         this.img = img;
         this.id = id;
+
         openning = new Animation(100, Assets.BookOpenning);
     }
 
@@ -90,7 +87,7 @@ public class BookInfo extends StaticEntity {
                 return Assets.Books[WorldLibrary.bookcount - 1];
             } else {
                 if (this.id == 6) {
-                    return Assets.Books[2];
+                    return Assets.QuizAsk;
                 } else {
                     return Assets.Books[this.id];
                 }

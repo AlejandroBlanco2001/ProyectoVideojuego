@@ -9,7 +9,6 @@ import Entities.EntityManager;
 import FirstMinigame.WorldGenerator.WorldLibrary;
 import Tilemaps.Assets;
 import MainG.Handler;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /**

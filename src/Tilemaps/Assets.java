@@ -1,5 +1,6 @@
 package Tilemaps;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Assets implements Runnable {
@@ -69,6 +70,7 @@ public class Assets implements Runnable {
 
     private static final int WIDHT = 131;
     private static final int HEIGHT = 110;
+    public static BufferedImage QuizAsk;
 
     /**
      * El metodo init() de la clase assets carga todas las imagenes que necesitaremos para los minijuegos

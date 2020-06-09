@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/MainLevel.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/Tilemaps/Assets.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/FirstMinigame/Tiles/TileLibrary.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/WorldGenerator/WorldPlat.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/MainLevel/Tiles/TileMainLevel.java</file>
@@ -11,6 +12,7 @@
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/Entities/Static/BookPile.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/Tilemaps/Tile.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/Level1State.java</file>
+            <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/Entities/Static/BookInfo.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/MenuState.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/src/GameStates/QuizState.java</file>
             <file>file:/C:/Users/Omen/Documents/GitHub/ProyectoVideojuego/nbproject/build-impl.xml</file>
