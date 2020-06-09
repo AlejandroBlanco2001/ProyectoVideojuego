@@ -217,4 +217,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.videoPlayed = videoPlayed;
     }
 
+    public void eraseFile() {
+        MenuState aux = (MenuState) gsm.getGameStates()[0];
+        aux.clearFile();
+    }
 }

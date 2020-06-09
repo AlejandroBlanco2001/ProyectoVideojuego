@@ -187,4 +187,13 @@ public class WorldPlat extends World {
         }
     }
 
+    public void resetTileSprite() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                TileMainLevel auxT = (TileMainLevel) getTile(x, y);
+                auxT.reloadTexture();
+            }
+        }
+    }
+
 }

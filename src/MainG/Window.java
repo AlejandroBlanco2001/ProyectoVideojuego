@@ -89,10 +89,12 @@ public class Window extends JFrame {
             System.out.println("CORRE");
         }
         this.getContentPane().setVisible(false);
+        emp.stop();
         GamePanel game = (GamePanel) this.panel;
         game.setAnimation(false);
         game.getGsm().setState(0);
         game.setVideoPlayed(false);
+        game.eraseFile();
         game.init();
     }
     // CODIGO DE https http: //www.codeurjava.com/2015/01/java-lire-les-fichiers-multimedia-video.html

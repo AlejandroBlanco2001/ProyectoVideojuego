@@ -12,7 +12,6 @@ import Tilemaps.Assets;
 import UI.Answer;
 import UI.ClickListener;
 import UI.UIManager;
-import UI.UIObject;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -136,6 +135,16 @@ public class QuizState extends GameState {
                     d.setNewCorrect(true);
                     break;
                 case 4:
+                    a.setNewInformation("Decodificar las comunicaciones secretas de la Unión Republicana Socialista Soviética");
+                    a.setNewCorrect(false);
+                    b.setNewInformation("Decodificar las comunicaciones secretas del Imperio Austro-húngaro");
+                    b.setNewCorrect(false);
+                    c.setNewInformation("Decodificar las comunicaciones secretas de Japón");
+                    c.setNewCorrect(false);
+                    d.setNewInformation("Decodificar las comunicaciones secretas del Gran Imperio Alemán");
+                    d.setNewCorrect(true);
+                    break;
+                case 5:
                     a.setNewInformation("Criptóloga");
                     a.setNewCorrect(false);
                     b.setNewInformation("Decodificadora");
@@ -143,16 +152,6 @@ public class QuizState extends GameState {
                     c.setNewInformation("Profesora");
                     c.setNewCorrect(false);
                     d.setNewInformation("Lingüista");
-                    d.setNewCorrect(true);
-                    break;
-                case 5:
-                    a.setNewInformation("Alan Turing");
-                    a.setNewCorrect(false);
-                    b.setNewInformation("Gordon Welchman");
-                    b.setNewCorrect(false);
-                    c.setNewInformation("Gordon Ramsey");
-                    c.setNewCorrect(false);
-                    d.setNewInformation("John Kenneth");
                     d.setNewCorrect(true);
                     break;
                 default:
@@ -254,6 +253,10 @@ public class QuizState extends GameState {
             }
             return openning.getCurrentFrame();
         }
+    }
+
+    public void killMusic() {
+
     }
 
 }

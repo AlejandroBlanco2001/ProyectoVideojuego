@@ -19,21 +19,21 @@ import java.awt.event.MouseMotionListener;
  *
  * @author German David
  */
-public class MouseManager implements MouseListener, MouseMotionListener{
+public class MouseManager implements MouseListener, MouseMotionListener {
+
     private static Point point = new Point();
-    private boolean leftPressed,rightPressed;
-    private int mouseX,mouseY;
+    private boolean leftPressed, rightPressed;
+    private int mouseX, mouseY;
     private UIManager uiManager;
-    
+
     public MouseManager() {
     }
-    
-    public void setUIManager(UIManager uiManager){
-        this.uiManager=uiManager;
+
+    public void setUIManager(UIManager uiManager) {
+        this.uiManager = uiManager;
     }
-    
+
     //Getters
-    
     public boolean isLeftPressed() {
         return leftPressed;
     }
@@ -49,39 +49,40 @@ public class MouseManager implements MouseListener, MouseMotionListener{
     public int getMouseY() {
         return mouseY;
     }
-        
-    
+
     //Implemented methods
     @Override
     public void mouseClicked(MouseEvent me) {
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
         point.x = me.getX();
         point.y = me.getY();
-        if(me.getButton()== MouseEvent.BUTTON1)
-            leftPressed= true;
-        else if(me.getButton()==MouseEvent.BUTTON3)
-            rightPressed=true;
+        if (me.getButton() == MouseEvent.BUTTON1) {
+            leftPressed = true;
+        } else if (me.getButton() == MouseEvent.BUTTON3) {
+            rightPressed = true;
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        if(me.getButton()== MouseEvent.BUTTON1)
-            leftPressed= false;
-        else if(me.getButton()==MouseEvent.BUTTON3)
-            rightPressed=false;
-        
+        if (me.getButton() == MouseEvent.BUTTON1) {
+            leftPressed = false;
+        } else if (me.getButton() == MouseEvent.BUTTON3) {
+            rightPressed = false;
+        }
+
         //Pasar mouseEvents a los UI
-        if(uiManager!= null){
+        if (uiManager != null) {
             uiManager.onMouseRelease(me);
         }
     }
 
     @Override
-    public void mouseEntered(MouseEvent me) {     
+    public void mouseEntered(MouseEvent me) {
     }
 
     @Override
@@ -90,28 +91,25 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        
-                Point p = GameLauncher.window.getLocation();
-                GameLauncher.window.setLocation(p.x + me.getX() - Window.mouse.mouseX, p.y + me.getY() - Window.mouse.mouseY);
-            
+        Point p = GameLauncher.window.getLocation();
+        GameLauncher.window.setLocation(p.x + me.getX() - Window.mouse.mouseX, p.y + me.getY() - Window.mouse.mouseY);
+
     }
 
     @Override
     public void mouseMoved(MouseEvent me) {
-        mouseX=me.getX();
-        mouseY=me.getY();
-        
-        
-        
-        if(uiManager != null){
+        mouseX = me.getX();
+        mouseY = me.getY();
+
+        if (uiManager != null) {
             uiManager.onMouseMove(me);
             for (UIObject object : uiManager.getObjects()) {
-                if(object instanceof UIImageButton){
-                    UIImageButton ui=(UIImageButton)object;
+                if (object instanceof UIImageButton) {
+                    UIImageButton ui = (UIImageButton) object;
                     ui.setCurrent(false);
                 }
             }
         }
     }
-    
+
 }

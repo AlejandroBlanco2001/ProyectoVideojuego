@@ -41,7 +41,7 @@ public class Answer extends UIObject{
             g.drawImage(Assets.Answer, (int) x, (int) (y),width,height, null);
             g.setColor(Color.BLACK);
         }
-        g.drawString(information,(int) x,(int) y);
+        g.drawString(information,(int) x + 20,(int) y + 40);
     }
 
     @Override

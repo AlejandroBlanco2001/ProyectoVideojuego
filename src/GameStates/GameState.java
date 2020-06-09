@@ -33,6 +33,8 @@ public abstract class GameState {
 
     public abstract World getWorld();
 
+    public abstract void killMusic();
+    
     // Se verifica si el usuario presiono la letra P, para iniciar un menu de Pausa.
     protected void pauseState() {
         timeDeltaTime = System.currentTimeMillis() - timePassed;

@@ -32,10 +32,11 @@ public class Level1State extends GameState {
         world = new WorldLibrary(this.handler, path, this);
         dialogueLoader = new DialogueLoader(handler);
         dialogueLoader.setGameTag(this.levelTag);
-        this.entityManager = this.world.getEntityM();
+        WorldLibrary aux = (WorldLibrary) world;
+        this.entityManager = aux.getEntityManager();
         uimanager = new UIManager(handler);
         uimanager.addUIObject(new UIHelper(Assets.UIHelperLvl1, 5000, 230, 457, 600, 253, uimanager));
-        this.levelManager = new Level1UpManager(this, world, entityManager);
+        this.levelManager = new Level1UpManager(this, world, aux.getEntityManager());
         init();
     }
 
@@ -52,9 +53,6 @@ public class Level1State extends GameState {
             onlyThis = false;
         }
         uimanager.tick();
-        if (Window.keyManager.debug) {
-            setGameFinished();
-        }
         // Iniciar el menu de pausa
         if (Window.keyManager.pause) {
             pauseState();
@@ -84,10 +82,15 @@ public class Level1State extends GameState {
 
     @Override
     public void getInsertData() {
+        levelManager.insertData();
+    }
+
+    public void killMusic() {
 
     }
 
     @Override
     public void getLoadData() {
+        levelManager.loadData();
     }
 }

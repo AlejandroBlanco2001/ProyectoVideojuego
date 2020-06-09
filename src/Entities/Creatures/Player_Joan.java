@@ -248,5 +248,11 @@ public class Player_Joan extends Character {
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
     }
+
+    public Handler getHandler() {
+        return handler;
+    }
+    
+    
     
 }

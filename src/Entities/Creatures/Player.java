@@ -104,8 +104,8 @@ public class Player extends Character {
         }
         if (Window.keyManager.left) {
             Xmove = (float) (-speed * handler.getDeltaTime());
-        }
-        if (Window.keyManager.space && canShoot(clock - now)) {
+        }        
+        if (Window.keyManager.actionTime && canShoot(clock - now)) {
             shot.play();
             manager.addEntity(new Bullet(handler, manager, this.getX() + this.getWidth() / 1.3f, this.getY() + this.getHeight() / 3.3f, 100, 100, this));
         }

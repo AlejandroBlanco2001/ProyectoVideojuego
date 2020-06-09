@@ -15,7 +15,7 @@ public class MainLevel extends GameState {
 
     private EntityManager entityManager;
     private World world;
-    private boolean gameChanged = false;
+    private boolean gameChanged;
     private MainLevelUpManager levelManager;
     private String path = "Resources/Worlds/WorldThematic1.txt";
     private UIManager uimanager;
@@ -32,6 +32,7 @@ public class MainLevel extends GameState {
         uimanager.addUIObject(new UIHelper(Assets.UIHelperMain, 5000, 400, 30, 475, 200));
         ya = true;
         isAnimation = false;
+        gameChanged = false;
         init();
     }
 
@@ -143,5 +144,10 @@ public class MainLevel extends GameState {
     public boolean isGameFinished() {
         MainLevelUpManager manager = (MainLevelUpManager) levelManager;
         return manager.getFinishedGame();
+    }
+
+    @Override
+    public void killMusic() {
+        levelManager.getMusicPlayer().kill();
     }
 }

@@ -27,9 +27,7 @@ public class Level2State extends GameState {
     private EntityManager entityManager;
     private Animation background;
     private boolean ya = true;
-    private long timePassed;
-    private long timeDeltaTime;
-    
+
     public Level2State(GameStateManager gsm, Handler handler, String tag) {
         super(gsm);
         this.handler = handler;
@@ -58,7 +56,6 @@ public class Level2State extends GameState {
         }
         background.update();
         musicControl();
-        //bg.update();
         hud.update();
         world.update();
         levelManager.update(hud.getPoint(), hud.getHealth());
@@ -88,7 +85,6 @@ public class Level2State extends GameState {
 
     public void setGameFinished() {
         // Finaliza el juego y devuelve al nivel prinicipal, se espera cambiar el setState, por el reloadState, puesto que por medio de ese se accede a este
-        // EFECTO DE TRANSICION
         gsm.getGameStates()[1].getLoadData();
         MainLevel auxS = (MainLevel) gsm.getGameStates()[1];
         auxS.getLevelManager().setFinishedMinigame();
@@ -113,5 +109,9 @@ public class Level2State extends GameState {
 
     public GameStateManager getGsm() {
         return gsm;
+    }
+
+    public void killMusic() {
+        levelManager.getMusicPlayer().kill();
     }
 }

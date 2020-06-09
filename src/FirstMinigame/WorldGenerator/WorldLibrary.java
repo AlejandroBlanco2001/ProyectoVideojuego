@@ -136,4 +136,19 @@ public class WorldLibrary extends World {
             entityM.getJoan().setX(entityM.getJoan().getX()-20);
         }
     }
+
+    public static int getBookcount() {
+        return bookcount;
+    }
+
+    public static void setBookcount(int bookcount) {
+        WorldLibrary.bookcount = bookcount;
+    }
+    
+    public void startQuiz(){
+        
+    }
+    
+    
+    
 }

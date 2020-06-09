@@ -13,6 +13,8 @@ public class TileMainLevel extends Tile {
     //STATIC STUFF
     public static int TILEWIDTH = 36, TILEHEIGHT = 36;
 
+    public BufferedImage previousImage;
+    
     public boolean isSolid = false;
     public boolean isVisible = true;
     public boolean isInteractive = false;
@@ -41,6 +43,7 @@ public class TileMainLevel extends Tile {
     //Class
     public TileMainLevel(BufferedImage texture, int id) {
         super(texture, id);
+        previousImage = texture;
         tiles[id] = this;
     }
 
@@ -92,6 +95,10 @@ public class TileMainLevel extends Tile {
     @Override
     public void render(Graphics g, int x, int y) {
         g.drawImage(texture, x, y, this.TILEWIDTH, this.TILEHEIGHT, null);
+    }
+    
+    public void reloadTexture(){
+        this.texture = previousImage;
     }
 
 }

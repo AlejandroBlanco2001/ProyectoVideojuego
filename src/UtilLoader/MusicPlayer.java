@@ -89,4 +89,10 @@ public class MusicPlayer implements Runnable {
             currentMusic.setVolume(0f);
         }
     }
+
+    public boolean isRunning() {
+        return running;
+    }
+    
+    
 }

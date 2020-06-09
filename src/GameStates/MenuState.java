@@ -91,7 +91,7 @@ public class MenuState extends GameState implements SaveGame {
         uimanager.addUIObject(new UIHelper(Assets.UIHelperMenu, 8000, 540, 430, 475, 200));
         anm = new Animation(100, Assets.backgroundMenu);
         init();
-        
+
     }
 
     @Override
@@ -109,8 +109,6 @@ public class MenuState extends GameState implements SaveGame {
             g.drawImage(Assets.backgroundMenu[22], 0, 0, 1080, 720, null);
             g.drawImage(Assets.Title2, 380, -60, null);
             // Aplica colores al titulo del juego
-            g.drawString("x" + Window.mouse.getMouseX() + " y" + Window.mouse.getMouseY(), Window.mouse.getMouseX(), Window.mouse.getMouseY());
-
             // Añade las opciones del menu
             if (noHovering()) {
                 noMoreCurrently();
@@ -166,7 +164,7 @@ public class MenuState extends GameState implements SaveGame {
         }
         // Opcion de continuar donde se habia dejado la partida
         if (Window.keyManager.enter) {
-            
+
         }
         if (Window.keyManager.test) {
             optionPicker();
@@ -255,21 +253,20 @@ public class MenuState extends GameState implements SaveGame {
 
         }
         // Se verifica que el archivo de TXT de guardado, tenga un state como primera linea, sino, esta es la primera vez que se inicia el juego
-        if (stateVerification.isEmpty() || stateVerification.isEmpty()) {
+        if (stateVerification == null || subStateVerification == null) {
             System.out.println("PARTIDA NUEVA");
+            gsm.setState(1);
         }
         state = Integer.parseInt(stateVerification);
         subState = Integer.parseInt(subStateVerification);
         // Se verifica si el State cargado por el TXT, no es nulo. Si este es nulo indica que el juego se cerro y se abrio de nuevo para crear el State, de lo contaro se carga normalmente con el reloadState.
-        if (!gsm.VerificarReinicioJuego(state)) {
+        if (!gsm.VerificarReinicioJuego(state) && subState != 1 && subState != 2) {
             gsm.reloadState(state);  // Se recarga el juego
             gsm.getGameStates()[1].getLoadData();// Se insertan los datos del txt   
         } else {
-            if (subState == 2 || subState == 3) {
-                subState = gsm.getMinigame(subState);
-                gsm.reloadState(subState);
-                gsm.getGameStates()[subState].getLoadData();
-            }
+            subState = gsm.getMinigame(subState);
+            gsm.reloadState(subState);
+            gsm.getGameStates()[subState].getLoadData();
         }
     }
 
@@ -322,7 +319,7 @@ public class MenuState extends GameState implements SaveGame {
             fwOb = new FileWriter(file, false);
         } catch (IOException ex) {
             Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
-}
+        }
         PrintWriter pwOb = new PrintWriter(fwOb, false);
         pwOb.flush();
         pwOb.close();
@@ -331,5 +328,14 @@ public class MenuState extends GameState implements SaveGame {
         } catch (IOException ex) {
             Logger.getLogger(MenuState.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void clearFile() {
+        clearFile("saveGeneralFile.txt");
+        clearFile("savefile.txt");
+    }
+    
+    public void killMusic(){
+    
     }
 }
