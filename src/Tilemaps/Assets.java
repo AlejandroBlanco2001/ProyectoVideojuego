@@ -11,7 +11,7 @@ public class Assets implements Runnable {
             floorDecorator1, platTiles, rightSing, wallTile, levelerTile, pyramidFill_1, pyramidFill_2, pyramidFill_3,
             spaceFloor, spaceWall, spaceWall2, spaceChest, spaceCrate, spaceBlocker, spaceTeleporter,
             CursorSpace, lastBackground, fondo8bits,pauseBackgroundLvl1,pauseBackgroundLvl2,pauseBackgroundMain,
-            Title, Title2, Answer,AnswerHover, MenuMain, Menu1,QuitLvl2,Table;
+            viñetaF,Title, Title2, Answer,AnswerHover, MenuMain, Menu1,QuitLvl2,Table;
 
     public static BufferedImage cityPlataformerBackground[] = new BufferedImage[56];
     public static BufferedImage playerDown[] = new BufferedImage[2];
@@ -94,7 +94,7 @@ public class Assets implements Runnable {
         enemy = ImageLoader.loadImage(("/Tilesets/Pursoid.png"));
         pursoid = ImageLoader.loadImage("/Tilesets/Pursoid.png");
         LaserAlien = ImageLoader.loadImage("/Tilesets/LaserAlien.png");
-        laser = ImageLoader.loadImage("/Tilesets/laser.png");
+        laser = ImageLoader.loadImage("/Tilesets/Laser.png");
         Title = ImageLoader.loadImage("/UI/Title.png");
         Title2 = ImageLoader.loadImage("/UI/Title2.png");
         Answer = ImageLoader.loadImage("/UI/Answer.png");
@@ -102,7 +102,7 @@ public class Assets implements Runnable {
         MenuMain = ImageLoader.loadImage("/UI/MenuMain.png");
         Menu1 = ImageLoader.loadImage("/UI/Menu1.png");
         QuitLvl2 = ImageLoader.loadImage("/UI/QuitLvl2.png");
-        
+        viñetaF = ImageLoader.loadImage("/SpritesMainLevel/Final_viñetas.jpg");
         
         SpriteSheet sheetAsteroids = new SpriteSheet(ImageLoader.loadImage("/Sprites/Tilesets/Sheetasteroids.png"));
         for (int i = 0; i < 2; i++) {
@@ -214,7 +214,7 @@ public class Assets implements Runnable {
         vida = sheetVida.crop(0, 0, 125, 201);
         halfLife = sheetVida.crop(266, 0, 125, 201);
         floor = ImageLoader.loadImage("/Testers/Floor.png");
-        library = ImageLoader.loadImage("/Testers/library.png");
+        library = ImageLoader.loadImage("/Testers/Library.png");
         CursorSpace = ImageLoader.loadImage("/Testers/spaceship.png");
         naveSemiOff = ImageLoader.loadImage("/Player/naveSemi.png");
         BookPile = ImageLoader.loadImage("/Testers/BookPile.png");
@@ -230,7 +230,7 @@ public class Assets implements Runnable {
         platTiles = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_2.png");
         rightSing = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Sign_arrowRight.png");
         wallTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_8.png");
-        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_10.png");
+        levelerTile = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_10.png");
         pyramidFill_1 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_7.png");
         pyramidFill_2 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_6.png");
         pyramidFill_3 = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_5.png");
@@ -239,12 +239,12 @@ public class Assets implements Runnable {
         spaceWall2 = ImageLoader.loadImage("/SpritesMainLevel/Space/Tile_6.png");
         spaceCrate = ImageLoader.loadImage("/SpritesMainLevel/Space/crate.png");
         spaceBlocker = ImageLoader.loadImage("/SpritesMainLevel/Space/blocker.png");
-        spaceTeleporter = ImageLoader.loadImage("/SpritesMainLevel/Space/teleporterNave.png");
+        spaceTeleporter = ImageLoader.loadImage("/SpritesMainLevel/Space/teleporteSpace.png");
         cargaSpikes(spikeSheet);
         cargarAnimacionTeleporter();
         minimize[0] = ImageLoader.loadImage("/UI/minimize.png");
         minimize[1] = ImageLoader.loadImage("/UI/minimizeHover.png");
-        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/Tile_14.png");
+        fondo8bits = ImageLoader.loadImage("/SpritesMainLevel/GameboyAssets/tile_14.png");
         fillPortal();
         fillBackgroundSpacePlat();
         fillBackgroundCityPlat();

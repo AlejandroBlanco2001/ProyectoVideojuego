@@ -13,8 +13,6 @@ public class InElevator extends ElevatorTile {
 
     public InElevator(int id) {
         super(id);
-        isSolid = false;
-        isVisible = true;
     }
 
     @Override

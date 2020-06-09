@@ -40,7 +40,7 @@ public class QuizState extends GameState {
         manager = new UIManager(handler);
         sw = true;
         Window.mouse.setUIManager(manager);
-        a = new Answer(true, "Correcta", 550, 240, 280, 50, new ClickListener() {
+        a = new Answer(true, "Gordon Welchman", 550, 240, 280, 50, new ClickListener() {
             @Override
             public void onClick() {
                 if (a.isCorrect()) {
@@ -54,7 +54,7 @@ public class QuizState extends GameState {
         });
         manager.addUIObject(a);
 
-        b = new Answer(false, "Falsa", 550, 340, 280, 50, new ClickListener() {
+        b = new Answer(false, "John Kenneth", 550, 340, 280, 50, new ClickListener() {
             @Override
             public void onClick() {
                 if (b.isCorrect()) {
@@ -67,7 +67,7 @@ public class QuizState extends GameState {
             }
         });
         manager.addUIObject(b);
-        c = new Answer(false, "Falsa", 550, 440, 280, 50, new ClickListener() {
+        c = new Answer(false, "Hut 8", 550, 440, 280, 50, new ClickListener() {
             @Override
             public void onClick() {
                 if (c.isCorrect()) {
@@ -80,7 +80,7 @@ public class QuizState extends GameState {
             }
         });
         manager.addUIObject(c);
-        d = new Answer(false, "Falsa", 550, 540, 280, 50, new ClickListener() {
+        d = new Answer(false, "Alan Turing", 550, 540, 280, 50, new ClickListener() {
             @Override
             public void onClick() {
                 if (d.isCorrect()) {
@@ -112,36 +112,48 @@ public class QuizState extends GameState {
             lastTime = 0;
             manager.tick();
             switch (i) {
-
                 case 1:
 
                     break;
                 case 2:
-                    a.setNewInformation("Level 2");
+                    a.setNewInformation("Coding and Cryptology Studies School");
                     a.setNewCorrect(false);
+                    b.setNewInformation("Government Code and Cypher School");
                     b.setNewCorrect(true);
-                    b.setNewInformation("Correcta");
+                    c.setNewInformation("Bletchley School of Cryptology");
+                    c.setNewCorrect(false);
+                    d.setNewInformation("Cryptology and applied Science");
+                    d.setNewCorrect(false);
                     break;
                 case 3:
-                    a.setNewInformation("Level 3");
+                    a.setNewInformation("Criptology group");
+                    a.setNewCorrect(false);
+                    b.setNewInformation("Office group");
                     b.setNewCorrect(false);
-                    b.setNewInformation("falsa");
-                    c.setNewCorrect(true);
-                    c.setNewInformation("Correcta");
+                    c.setNewInformation("Las mujeres");
+                    c.setNewCorrect(false);
+                    d.setNewInformation("Las niñas");
+                    d.setNewCorrect(true);
                     break;
                 case 4:
-                    a.setNewInformation("Level 4");
+                    a.setNewInformation("Criptóloga");
+                    a.setNewCorrect(false);
+                    b.setNewInformation("Decodificadora");
+                    b.setNewCorrect(false);
+                    c.setNewInformation("Profesora");
                     c.setNewCorrect(false);
-                    c.setNewInformation("Falsa");
-                    b.setNewCorrect(true);
-                    b.setNewInformation("Correcta");
+                    d.setNewInformation("Lingüista");
+                    d.setNewCorrect(true);
                     break;
                 case 5:
-                    a.setNewInformation("Level 2");
+                    a.setNewInformation("Alan Turing");
+                    a.setNewCorrect(false);
+                    b.setNewInformation("Gordon Welchman");
                     b.setNewCorrect(false);
-                    b.setNewInformation("Falsa");
+                    c.setNewInformation("Gordon Ramsey");
+                    c.setNewCorrect(false);
+                    d.setNewInformation("John Kenneth");
                     d.setNewCorrect(true);
-                    d.setNewInformation("Correcta");
                     break;
                 default:
                     WorldLibrary auxW = (WorldLibrary) gsm.getGameStates()[2].getWorld();

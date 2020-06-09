@@ -28,6 +28,7 @@ public class WorldPlat extends World {
     private EntityManager entityM;
     private String path;
     private Animation animationParallax = new Animation(100, Assets.cityPlataformerBackground);
+    private float volume = 5.0f;
 
     private Sound openGate, closeGate;
 
@@ -41,6 +42,7 @@ public class WorldPlat extends World {
 
     public void init() {
         openGate = AudioLoader.openGate;
+        fixElevators();
     }
 
     @Override
@@ -101,12 +103,26 @@ public class WorldPlat extends World {
             for (int x = 0; x < width; x++) {
                 TileMainLevel auxT = (TileMainLevel) getTile(x, y);
                 if (auxT instanceof ElevatorTile) {
+                    ElevatorTile elevator = (ElevatorTile) auxT;
                     if (switched % 2 != 0) {
-                        auxT.buttonPressed();
+                        elevator.buttonPressed();
                     } else {
-                        auxT.buttonRelased();
+                        elevator.buttonRelased();
                     }
-                    openGate.play(0.4f);
+                    openGate.stop();
+                    openGate.play(volume);
+                }
+            }
+        }
+    }
+
+    public void fixElevators() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                TileMainLevel auxT = (TileMainLevel) getTile(x, y);
+                if (auxT instanceof ElevatorTile) {
+                    ElevatorTile elevator = (ElevatorTile) auxT;
+                    elevator.buttonRelased();
                 }
             }
         }
@@ -152,7 +168,7 @@ public class WorldPlat extends World {
     }
 
     public void changeAnimation() {
-        animationParallax = new Animation(30, Assets.spaceBackgroundPlat);
+        //animationParallax = new Animation(100, Assets.spaceBackgroundPlat);
     }
 
     public void setTeleporterFalse(boolean model) {

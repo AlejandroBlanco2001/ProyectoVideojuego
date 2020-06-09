@@ -36,7 +36,6 @@ public class Boss extends Enemy {
 
         last = System.currentTimeMillis();
         this.setHealth(300);
-        this.setSpeed(10);
         speed = 200;
         bounds.x = 0;
         bounds.y = 0;

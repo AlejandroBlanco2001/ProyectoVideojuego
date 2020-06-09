@@ -44,9 +44,6 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
     }
 
     public void init() {
-        if (state.getGsm().getCurrentState() == 3) {
-        hiloMusica = new Thread(musicPlayer, "hiloAuxiliarMusica");
-    }
         flag1 = false;
         flag2 = false;
         flag3 = false;
@@ -113,6 +110,7 @@ public class Level2UpManager extends LevelUpManager implements SaveGame {
 
     public void update(int points, int health) {
         if (firstTime) {
+            hiloMusica = new Thread(musicPlayer, "hiloAuxiliarMusica");
             hiloMusica.start();
             firstTime = false;
         }

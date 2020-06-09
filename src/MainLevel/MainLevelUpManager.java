@@ -120,7 +120,7 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
                     if (!flag5) {
                         worldAux.switchAllTheTiles();
                         worldAux.changeAnimation();
-                        player.setGravity(400);
+                        player.setGravity(600);
                         player.setMaxReturns(1);
                         player.setAmountOfReturns(0);
                         flag5 = true;
@@ -352,6 +352,10 @@ public class MainLevelUpManager extends LevelUpManager implements SaveGame {
 
     public MusicPlayer getMusicPlayer() {
         return musicPlayer;
+    }
+
+    public int getCurrentWorld() {
+        return currentWorld;
     }
     
     

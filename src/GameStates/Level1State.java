@@ -23,6 +23,7 @@ public class Level1State extends GameState {
     private EntityManager entityManager;
     private boolean doingQuiz = false;
     private UIManager uimanager;
+    private boolean onlyThis;
 
     public Level1State(GameStateManager gsm, Handler handler, String tag) {
         super(gsm);
@@ -33,18 +34,23 @@ public class Level1State extends GameState {
         dialogueLoader.setGameTag(this.levelTag);
         this.entityManager = this.world.getEntityM();
         uimanager = new UIManager(handler);
-        uimanager.addUIObject(new UIHelper(Assets.UIHelperLvl1,5000,230,457,600,253,uimanager));
+        uimanager.addUIObject(new UIHelper(Assets.UIHelperLvl1, 5000, 230, 457, 600, 253, uimanager));
         this.levelManager = new Level1UpManager(this, world, entityManager);
         init();
     }
 
     @Override
     public void init() {
+        onlyThis = true;
         timePassed = System.currentTimeMillis();
     }
 
     @Override
     public void update() {
+        if (onlyThis) {
+            Window.mouse.setUIManager(uimanager);
+            onlyThis = false;
+        }
         uimanager.tick();
         if (Window.keyManager.debug) {
             setGameFinished();
